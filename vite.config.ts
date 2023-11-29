@@ -20,6 +20,8 @@ export default defineConfig({
         "**/types.ts",
         "**/*.d.ts",
         "**/src/main.tsx",
+        "src/styles/GlobalStyle.ts",
+        "src/setupTests.ts",
       ],
     },
   },
