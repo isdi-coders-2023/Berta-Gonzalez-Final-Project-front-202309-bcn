@@ -5,12 +5,13 @@ import "@fontsource/patrick-hand";
 import "@fontsource/patrick-hand/400.css";
 import mainTheme from "./styles/MainTheme";
 import GlobalStyled from "./styles/GlobalStyle";
+import App from "./components/App/App";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ThemeProvider theme={mainTheme}>
       <GlobalStyled />
-      <div />
+      <App />
     </ThemeProvider>
   </React.StrictMode>,
 );
