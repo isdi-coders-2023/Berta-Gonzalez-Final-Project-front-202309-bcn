@@ -12,9 +12,11 @@ const BallsNavMenuStyled = styled.ul`
   top: 80px;
   background-color: ${({ theme }) => theme.color.secondaryColor};
 
-  .navigation__text {
-    font-size: 27px;
-    margin-right: 30px;
+  .navigation {
+    &__text {
+      font-size: 27px;
+      margin-right: 30px;
+    }
   }
 
   .active {
