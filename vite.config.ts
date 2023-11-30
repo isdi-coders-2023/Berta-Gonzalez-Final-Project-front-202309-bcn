@@ -21,7 +21,6 @@ export default defineConfig({
         "**/*.d.ts",
         "**/src/main.tsx",
         "src/setupTests.ts",
-        "src/styles/GlobalStyle.ts",
       ],
     },
   },
