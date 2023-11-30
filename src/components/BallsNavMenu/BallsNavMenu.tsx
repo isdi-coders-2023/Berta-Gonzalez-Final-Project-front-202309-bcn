@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import BallsNavMenuStyled from "./BallNavMenuStyled";
+import BallsNavMenuStyled from "./BallsNavMenuStyled";
 
 const BallsNavMenu = (): React.ReactElement => {
   return (
