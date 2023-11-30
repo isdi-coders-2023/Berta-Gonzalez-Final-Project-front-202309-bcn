@@ -3,7 +3,7 @@ import BallsNavMenuStyled from "./BallsNavMenuStyled";
 
 const BallsNavMenu = (): React.ReactElement => {
   return (
-    <BallsNavMenuStyled>
+    <BallsNavMenuStyled className="navigation">
       <li>
         <NavLink aria-label="home" to="/balls">
           <span className="navigation__text">Home</span>

@@ -7,8 +7,8 @@ const BallsHeader = (): React.ReactElement => {
         className="logo"
         src="images/logo.webp"
         alt="Nerdmas Balls logo"
-        width={240}
-        height={51}
+        width="240"
+        height="51"
       />
     </BallsHeaderStyled>
   );
