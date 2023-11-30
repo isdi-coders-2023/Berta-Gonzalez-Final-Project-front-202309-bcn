@@ -5,7 +5,7 @@ const BallsNavMenu = (): React.ReactElement => {
   return (
     <BallsNavMenuStyled>
       <li>
-        <NavLink aria-label="home" to="/home">
+        <NavLink aria-label="home" to="/balls">
           <span className="navigation__text">Home</span>
         </NavLink>
       </li>
