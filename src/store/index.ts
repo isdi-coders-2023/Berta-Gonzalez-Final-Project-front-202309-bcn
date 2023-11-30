@@ -1,7 +1,10 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
+import { ballsReducer } from "./features/balls/ballsSlice";
 
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    ballsState: ballsReducer,
+  },
 });
 
 export type AppDispatch = typeof store.dispatch;
