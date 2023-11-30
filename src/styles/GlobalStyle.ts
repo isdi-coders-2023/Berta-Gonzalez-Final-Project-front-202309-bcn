@@ -1,40 +1,45 @@
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyled = createGlobalStyle`
-*,
-::before,
-::after {
-  box-sizing: border-box;
-}
+  *,
+  ::before,
+  ::after {
+    box-sizing: border-box;
+  }
 
-body,
-h1,
-h2 {
-  margin: 0;
-}
+  body,
+  h1,
+  h2 {
+    margin: 0;
+  }
 
-ul,
-li {
-  list-style: none;
-  margin-top: 0;
-  padding: 0;
-}
+  body{
+    color: ${({ theme }) => theme.color.mainFontColor};
+    font-family: ${({ theme }) => theme.typography.mainFontFamily}
+  }
 
-img {
-  width: 100%;
-}
+  ul,
+  li {
+    list-style: none;
+    margin-top: 0;
+    padding: 0;
+  }
 
-a{
-  text-decoration: none;
-  color: inherit;
-}
+  img {
+    max-width: 100%;
+  }
 
-button{
-  border: none;
-  background-color: transparent;
-  font: inherit;
-  cursor: pointer;
-}
+  a{
+    text-decoration: none;
+    color: inherit;
+  }
+
+  button{
+    border: none;
+    background-color: transparent;
+    font: inherit;
+    cursor: pointer;
+  }
 `;
 
 export default GlobalStyled;
