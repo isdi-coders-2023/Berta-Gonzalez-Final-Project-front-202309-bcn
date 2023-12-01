@@ -1,19 +1,20 @@
 import styled from "styled-components";
 
 const BallsListStyled = styled.ul`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 300px;
+  align-items: start;
+  justify-content: center;
+  gap: 48px;
 
-  @media (min-width: 750px) {
+  @media (min-width: 686px) {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 300px);
   }
 
-  @media (min-width: 850px) {
+  @media (min-width: 1000px) {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 25px;
+    grid-template-columns: repeat(3, 300px);
   }
 `;
 
