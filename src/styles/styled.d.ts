@@ -9,6 +9,8 @@ declare module "styled-components" {
       secondaryColor: string;
       buttonMainColor: string;
       buttonDesableColor: string;
+      buttonHaveOK: string;
+      buttonNotHave: string;
       okFeedbackBackgroundColor: string;
       failFeedbackBackgroundColor: string;
     };
