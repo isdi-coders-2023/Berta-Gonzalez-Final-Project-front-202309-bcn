@@ -40,6 +40,7 @@
     "husky": "^8.0.0",
     "jsdom": "^22.1.0",
     "lint-staged": "^15.1.0",
+    "msw": "^2.0.9",
     "react-router-dom": "^6.20.0",
     "styled-components": "^6.1.1",
     "typescript": "^5.0.2",
