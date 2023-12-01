@@ -6,7 +6,7 @@ const BallsHomePageStyled = styled.main`
 
   .homepage-text {
     margin-bottom: 25px;
-    font-size: 23px;
+    font-size: 1.438rem;
     font-weight: 400;
   }
 `;

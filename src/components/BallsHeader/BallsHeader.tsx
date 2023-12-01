@@ -1,3 +1,4 @@
+import BallsNavMenu from "../BallsNavMenu/BallsNavMenu";
 import BallsHeaderStyled from "./BallsHeaderStyled";
 
 const BallsHeader = (): React.ReactElement => {
@@ -10,6 +11,7 @@ const BallsHeader = (): React.ReactElement => {
         width="240"
         height="51"
       />
+      <BallsNavMenu />
     </BallsHeaderStyled>
   );
 };
