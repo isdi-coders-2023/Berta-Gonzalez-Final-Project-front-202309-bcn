@@ -2,8 +2,7 @@ import styled from "styled-components";
 
 const BallsHeaderStyled = styled.header`
   display: flex;
-  justify-content: space-around;
-  flex-direction: row;
+  justify-content: center;
   position: fixed;
   width: 100%;
   height: 80px;
