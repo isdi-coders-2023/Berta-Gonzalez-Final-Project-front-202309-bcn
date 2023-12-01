@@ -6,14 +6,6 @@ interface BallsProps {
 }
 
 const BallsCard = ({ ball }: BallsProps): React.ReactElement => {
-  const isAvailable = () => {
-    if (ball.isAvailable) {
-      return "Yes";
-    }
-
-    return "No";
-  };
-
   return (
     <BallsCardStyled className="card">
       <img
@@ -30,11 +22,11 @@ const BallsCard = ({ ball }: BallsProps): React.ReactElement => {
         </li>
         <li className="card__item">
           <span>Available:</span>
-          <span>{isAvailable()}</span>
+          <span>{ball.isAvailable ? "Yes" : "No"}</span>
         </li>
         <li className="card__item">
           <span>Collection:</span>
-          <span>{ball.collection}</span>
+          <span className="card__collection">{ball.collection}</span>
         </li>
         <li className="card__item">
           <span>Shop:</span>
