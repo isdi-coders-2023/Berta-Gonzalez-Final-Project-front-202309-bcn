@@ -26,6 +26,18 @@ const ballsMock: BallsStructure[] = [
     description: "My neighbor Totoro main cast glitter balls",
     isTengui: false,
   },
+  {
+    _id: "65624281c4ddfcae992147f9",
+    ballName: "Mario Bros",
+    isAvailable: false,
+    collection: "Mario Bross",
+    shop: "-",
+    yearRelease: 2022,
+    price: 11.2,
+    imageUrl: "https://i.ibb.co/6rZYy4T/mario-bros.webp",
+    description: "Mario Bross main cast handmaid balls",
+    isTengui: true,
+  },
 ];
 
 export default ballsMock;
