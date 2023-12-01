@@ -1,19 +1,21 @@
 import styled from "styled-components";
 
 const BallsNavMenuStyled = styled.nav`
+  display: flex;
+  position: fixed;
+  justify-content: flex-end;
+  align-items: flex-start;
+  height: 43px;
+  width: 100%;
+  top: 80px;
+  background-color: ${({ theme }) => theme.color.secondaryColor};
+
   .navigation {
-    position: fixed;
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
-    height: 43px;
-    width: 100%;
 
-    top: 80px;
-    background-color: ${({ theme }) => theme.color.secondaryColor};
     &__text {
-      font-size: 27px;
+      font-size: 1.688rem;
       margin-right: 30px;
     }
   }

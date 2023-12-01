@@ -5,14 +5,14 @@ const BallsNavMenu = (): React.ReactElement => {
   return (
     <BallsNavMenuStyled>
       <ul className="navigation">
-        <li>
+        <li className="navigation__text">
           <NavLink aria-label="home" to="/balls">
-            <span className="navigation__text">Home</span>
+            <span>Home</span>
           </NavLink>
         </li>
-        <li>
+        <li className="navigation__text">
           <NavLink aria-label="add-form" to="/add">
-            <span className="navigation__text">Add</span>
+            <span>Add</span>
           </NavLink>
         </li>
       </ul>
