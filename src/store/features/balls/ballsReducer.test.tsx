@@ -1,6 +1,10 @@
 import ballsMock from "../../../mocks/ballsMock";
-import { BallsStateStructure } from "../types";
-import { ballsReducer, loadBallsActionCreator } from "./ballsSlice";
+import { BallsStateStructure, BallsStructure } from "../types";
+import {
+  ballsReducer,
+  loadBallsActionCreator,
+  toggleIsCheckedActionCreator,
+} from "./ballsSlice";
 
 describe("Given a ballsReducer", () => {
   describe("When it receives an empty list of balls", () => {
@@ -16,6 +20,24 @@ describe("Given a ballsReducer", () => {
       );
 
       expect(newBallsState.balls).toStrictEqual(ballsList);
+    });
+  });
+  describe("When it receives the action to mark a ball as have", () => {
+    test("Then it should update the list with that ball mark as have", () => {
+      const expectedModifiedHaveState: { balls: BallsStructure[] } = {
+        balls: ballsMock,
+      };
+
+      const previousStat: { balls: BallsStructure[] } = {
+        balls: ballsMock,
+      };
+
+      const modifiedHaveBalls = ballsReducer(
+        previousStat,
+        toggleIsCheckedActionCreator("2"),
+      );
+
+      expect(modifiedHaveBalls).toEqual(expectedModifiedHaveState);
     });
   });
 });
