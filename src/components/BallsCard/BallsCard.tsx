@@ -1,4 +1,8 @@
+import { useDispatch } from "react-redux";
+import { toggleIsCheckedActionCreator } from "../../store/features/balls/ballsSlice";
 import { BallsStructure } from "../../store/features/types";
+import BallsButton from "../BallsButton/BallsButton";
+import BallsSwitchButton from "../BallsSwitchButton/BallsSwitchButton";
 import BallsCardStyled from "./BallsCardStyled";
 
 interface BallsProps {
@@ -6,6 +10,11 @@ interface BallsProps {
 }
 
 const BallsCard = ({ ball }: BallsProps): React.ReactElement => {
+  const dispatch = useDispatch();
+  const updateTengui = () => {
+    dispatch(toggleIsCheckedActionCreator(ball._id));
+  };
+
   return (
     <BallsCardStyled className="card">
       <img
@@ -19,6 +28,11 @@ const BallsCard = ({ ball }: BallsProps): React.ReactElement => {
       <ul className="card__list-container">
         <li className="card__item">
           <span>Have:</span>
+          <BallsSwitchButton
+            ballName={ball.ballName}
+            actionOnChange={updateTengui}
+            classModifier={ball.isTengui}
+          />
         </li>
         <li className="card__item">
           <span>Available:</span>
@@ -33,6 +47,26 @@ const BallsCard = ({ ball }: BallsProps): React.ReactElement => {
           <span>{ball.shop}</span>
         </li>
       </ul>
+      <div className="buttons">
+        <BallsButton
+          text="Info"
+          type="button"
+          classModifier=""
+          actionOnClick={undefined}
+        />
+        <BallsButton
+          text="Modify"
+          type="button"
+          classModifier=""
+          actionOnClick={undefined}
+        />
+        <BallsButton
+          text="Delete"
+          type="button"
+          classModifier=""
+          actionOnClick={undefined}
+        />
+      </div>
     </BallsCardStyled>
   );
 };
