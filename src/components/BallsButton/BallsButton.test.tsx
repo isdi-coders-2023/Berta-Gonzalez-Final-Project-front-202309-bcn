@@ -8,7 +8,11 @@ describe("Given a Button component", () => {
       const expectedButtonText = "info";
 
       customRender(
-        <BallsButton text={expectedButtonText} type="button" modifier="" />,
+        <BallsButton
+          text={expectedButtonText}
+          type="button"
+          classModifier=""
+        />,
       );
       const button = screen.getByRole("button", { name: expectedButtonText });
 
