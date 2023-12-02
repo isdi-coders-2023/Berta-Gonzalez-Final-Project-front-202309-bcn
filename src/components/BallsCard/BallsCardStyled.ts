@@ -38,6 +38,16 @@ const BallsCardStyled = styled.article`
       text-align: end;
     }
   }
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    margin-top: 36px;
+    margin-bottom: 10px;
+  }
 `;
 
 export default BallsCardStyled;
