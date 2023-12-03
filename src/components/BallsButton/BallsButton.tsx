@@ -4,17 +4,17 @@ interface BallsButtonProps {
   text: string;
   type: "submit" | "button";
   actionOnClick?: () => void;
-  classModifier: string;
+  classModifier: "button--disabled" | "";
 }
 
 const BallsButton = ({
   text,
   type,
   actionOnClick,
-  classModifier: classModifier,
+  classModifier,
 }: BallsButtonProps): React.ReactElement => (
   <BallsButtonStyled
-    className={`button ${classModifier ? `button--${classModifier}` : " "}`}
+    className={`button ${classModifier ? classModifier : ""}`}
     type={type}
     onClick={actionOnClick}
   >
