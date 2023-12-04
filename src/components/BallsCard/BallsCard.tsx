@@ -1,8 +1,7 @@
 import { useDispatch } from "react-redux";
 import { toggleIsCheckedActionCreator } from "../../store/features/balls/ballsSlice";
-import { BallsStructure } from "../../store/features/types";
+import { BallsStructure } from "../../store/features/balls/types";
 import BallsButton from "../BallsButton/BallsButton";
-import BallsSwitchButton from "../BallsSwitchButton/BallsSwitchButton";
 import BallsCardStyled from "./BallsCardStyled";
 
 interface BallsProps {
@@ -26,13 +25,17 @@ const BallsCard = ({ ball }: BallsProps): React.ReactElement => {
       />
       <h2 className="card__ball-name">{ball.ballName}</h2>
       <ul className="card__list-container">
-        <li className="card__item">
-          <span>Have:</span>
-          <BallsSwitchButton
-            ballName={ball.ballName}
-            actionOnChange={updateTengui}
-            classModifier={ball.isTengui}
-          />
+        <li className="card__item card__item--label">
+          <label className="card__label">
+            <span>Have:</span>
+            <input
+              className="card__checkbox"
+              title="it's have or not checkbox"
+              type="checkbox"
+              checked={ball.isTengui}
+              onChange={updateTengui}
+            />
+          </label>
         </li>
         <li className="card__item">
           <span>Available:</span>
