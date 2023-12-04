@@ -1,5 +1,5 @@
 import ballsMock from "../../../mocks/ballsMock";
-import { BallsStateStructure, BallsStructure } from "../types";
+import { BallsStateStructure, BallsStructure } from "./types";
 import {
   ballsReducer,
   loadBallsActionCreator,
@@ -24,6 +24,7 @@ describe("Given a ballsReducer", () => {
   });
   describe("When it receives the action to mark a ball as have", () => {
     test("Then it should update the list with that ball mark as have", () => {
+      const numberOfToggle = "2";
       const expectedModifiedHaveState: { balls: BallsStructure[] } = {
         balls: ballsMock,
       };
@@ -34,7 +35,7 @@ describe("Given a ballsReducer", () => {
 
       const modifiedHaveBalls = ballsReducer(
         previousStat,
-        toggleIsCheckedActionCreator("2"),
+        toggleIsCheckedActionCreator(numberOfToggle),
       );
 
       expect(modifiedHaveBalls).toEqual(expectedModifiedHaveState);

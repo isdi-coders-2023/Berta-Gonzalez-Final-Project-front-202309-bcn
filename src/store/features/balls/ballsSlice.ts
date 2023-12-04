@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { BallsStateStructure, BallsStructure } from "../types";
+import { BallsStateStructure, BallsStructure } from "./types";
 
 const initialBallsSlice: BallsStateStructure = {
   balls: [],
