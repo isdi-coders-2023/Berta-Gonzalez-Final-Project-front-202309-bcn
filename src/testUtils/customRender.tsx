@@ -1,27 +1,43 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { render } from "@testing-library/react";
-import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
+import { store } from "../store";
 import { ThemeProvider } from "styled-components";
 import mainTheme from "../styles/MainTheme";
 import GlobalStyled from "../styles/GlobalStyle";
 import { ballsReducer } from "../store/features/balls/ballsSlice";
-import ballsMock from "../mocks/ballsMock";
+import { BallsStructure } from "../store/features/balls/types";
+import { MemoryRouter } from "react-router";
+import { uiReducer } from "../store/features/ui/uiSlice";
+import { PropsWithChildren } from "react";
 
-const customRender = (children: React.ReactElement) => {
+export const customRender = (
+  children: React.ReactElement,
+  ballsMock: BallsStructure[],
+) => {
   const mockStore = configureStore({
-    reducer: { ballsState: ballsReducer },
-    preloadedState: { ballsState: { balls: ballsMock } },
+    reducer: {
+      ballsState: ballsReducer,
+      uiState: uiReducer,
+    },
+    preloadedState: {
+      ballsState: { balls: ballsMock },
+      uiState: { isLoading: false },
+    },
   });
 
   render(
-    <BrowserRouter>
-      <GlobalStyled />
-      <ThemeProvider theme={mainTheme}>
-        <Provider store={mockStore}>{children}</Provider>
-      </ThemeProvider>
-    </BrowserRouter>,
+    <MemoryRouter>
+      <Provider store={mockStore}>
+        <ThemeProvider theme={mainTheme}>
+          <GlobalStyled />
+          {children}
+        </ThemeProvider>
+      </Provider>
+    </MemoryRouter>,
   );
 };
 
-export default customRender;
+export const providerWrapper = ({ children }: PropsWithChildren) => {
+  return <Provider store={store}>{children}</Provider>;
+};
