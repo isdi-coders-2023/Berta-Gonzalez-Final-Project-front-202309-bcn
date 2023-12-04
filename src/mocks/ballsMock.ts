@@ -1,4 +1,4 @@
-import { BallsStructure } from "../store/features/types";
+import { BallsStructure } from "../store/features/balls/types";
 
 const ballsMock: BallsStructure[] = [
   {

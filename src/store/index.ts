@@ -1,9 +1,11 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 import { ballsReducer } from "./features/balls/ballsSlice";
+import { uiReducer } from "./features/ui/uiSlice";
 
 export const store = configureStore({
   reducer: {
     ballsState: ballsReducer,
+    uiState: uiReducer,
   },
 });
 

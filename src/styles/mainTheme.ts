@@ -8,7 +8,7 @@ const mainTheme: DefaultTheme = {
     secondaryColor: "#dc8989",
     buttonMainColor: "#d77a7a",
     buttonDesableColor: "#eec8c8",
-    buttonHaveOK: "#b1cbb",
+    buttonHaveOK: "#b1cbbb",
     buttonNotHave: "#c94c4c",
     okFeedbackBackgroundColor: "#5db381",
     failFeedbackBackgroundColor: "#b71c1c",

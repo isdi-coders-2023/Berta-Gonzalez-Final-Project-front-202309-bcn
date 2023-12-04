@@ -33,10 +33,16 @@ const BallsCardStyled = styled.article`
       margin-bottom: 16px;
     }
 
-    &__collection {
-      line-break: auto;
-      text-align: end;
+    &__checkbox {
+      margin-left: 151px;
+      width: 20px;
+      height: 20px;
     }
+  }
+
+  &__collection {
+    line-break: auto;
+    text-align: end;
   }
 
   .buttons {

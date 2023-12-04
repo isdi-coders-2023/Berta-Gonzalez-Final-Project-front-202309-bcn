@@ -1,6 +1,7 @@
 import { renderHook } from "@testing-library/react";
 import ballsMock from "../mocks/ballsMock";
 import useBallsApi from "./useBallsApi";
+import { providerWrapper } from "../testUtils/customRender";
 
 describe("Given a useBallsApi custom hook", () => {
   describe("When it receives information of 'Harry Potter crew', 'My neighbour Totoro' and 'Mario Bros'", () => {
@@ -11,7 +12,7 @@ describe("Given a useBallsApi custom hook", () => {
         result: {
           current: { getBallsApi },
         },
-      } = renderHook(() => useBallsApi());
+      } = renderHook(() => useBallsApi(), { wrapper: providerWrapper });
 
       const currentBalls = await getBallsApi();
 

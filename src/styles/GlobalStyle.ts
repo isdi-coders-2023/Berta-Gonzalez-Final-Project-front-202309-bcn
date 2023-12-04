@@ -1,6 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
-const GlobalStyled = createGlobalStyle`
+const GlobalStyle = createGlobalStyle`
   *,
   ::before,
   ::after {
@@ -13,7 +13,7 @@ const GlobalStyled = createGlobalStyle`
     margin: 0;
   }
 
-  body{
+  body {
     color: ${({ theme }) => theme.color.mainFontColor};
     font-family: ${({ theme }) => theme.typography.mainFontFamily}
   }
@@ -29,12 +29,12 @@ const GlobalStyled = createGlobalStyle`
     max-width: 100%;
   }
 
-  a{
+  a {
     text-decoration: none;
     color: inherit;
   }
 
-  button{
+  button {
     border: none;
     background-color: transparent;
     font: inherit;
@@ -42,4 +42,4 @@ const GlobalStyled = createGlobalStyle`
   }
 `;
 
-export default GlobalStyled;
+export default GlobalStyle;
