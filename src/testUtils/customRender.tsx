@@ -3,8 +3,8 @@ import { render } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { store } from "../store";
 import { ThemeProvider } from "styled-components";
-import mainTheme from "../styles/MainTheme";
-import GlobalStyled from "../styles/GlobalStyle";
+import mainTheme from "../styles/mainTheme";
+import GlobalStyle from "../styles/GlobalStyle";
 import { ballsReducer } from "../store/features/balls/ballsSlice";
 import { BallsStructure } from "../store/features/balls/types";
 import { MemoryRouter } from "react-router";
@@ -30,7 +30,7 @@ export const customRender = (
     <MemoryRouter>
       <Provider store={mockStore}>
         <ThemeProvider theme={mainTheme}>
-          <GlobalStyled />
+          <GlobalStyle />
           {children}
         </ThemeProvider>
       </Provider>

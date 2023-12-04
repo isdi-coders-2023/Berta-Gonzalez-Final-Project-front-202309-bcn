@@ -1,5 +1,3 @@
-import { useDispatch } from "react-redux";
-import { toggleIsCheckedActionCreator } from "../../store/features/balls/ballsSlice";
 import { BallsStructure } from "../../store/features/balls/types";
 import BallsButton from "../BallsButton/BallsButton";
 import BallsCardStyled from "./BallsCardStyled";
@@ -9,11 +7,6 @@ interface BallsProps {
 }
 
 const BallsCard = ({ ball }: BallsProps): React.ReactElement => {
-  const dispatch = useDispatch();
-  const updateTengui = () => {
-    dispatch(toggleIsCheckedActionCreator(ball._id));
-  };
-
   return (
     <BallsCardStyled className="card">
       <img
@@ -33,7 +26,6 @@ const BallsCard = ({ ball }: BallsProps): React.ReactElement => {
               title="it's have or not checkbox"
               type="checkbox"
               checked={ball.isTengui}
-              onChange={updateTengui}
             />
           </label>
         </li>
