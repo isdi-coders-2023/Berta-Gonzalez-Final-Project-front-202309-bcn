@@ -14,7 +14,7 @@ const BallsButton = ({
   classModifier,
 }: BallsButtonProps): React.ReactElement => (
   <BallsButtonStyled
-    className={`button ${classModifier ? `button${classModifier}` : ""}`}
+    className={`button ${classModifier ? "button--" + classModifier : ""}`}
     type={type}
     onClick={actionOnClick}
   >

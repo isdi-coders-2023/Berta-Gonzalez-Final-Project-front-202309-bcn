@@ -7,6 +7,10 @@ const handler = [
   http.get(`${urlApi}/balls`, () => {
     return HttpResponse.json(ballsMock);
   }),
+
+  http.delete(`${urlApi}/balls/656241b0c4ddfcae991f0b13`, () =>
+    HttpResponse.json({}),
+  ),
 ];
 
 export default handler;

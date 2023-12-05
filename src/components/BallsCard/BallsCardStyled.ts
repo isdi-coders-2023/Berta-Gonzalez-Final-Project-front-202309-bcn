@@ -37,6 +37,7 @@ const BallsCardStyled = styled.article`
       margin-left: 151px;
       width: 20px;
       height: 20px;
+      accent-color: ${({ theme }) => theme.color.buttonHaveOK};
     }
   }
 

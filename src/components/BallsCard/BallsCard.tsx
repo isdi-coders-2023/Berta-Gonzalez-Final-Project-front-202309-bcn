@@ -1,12 +1,33 @@
+import { useDispatch } from "react-redux";
+import {
+  deleteBallsActionCreator,
+  toggleHaveBallsActionCreator,
+} from "../../store/features/balls/ballsSlice";
 import { BallsStructure } from "../../store/features/balls/types";
 import BallsButton from "../BallsButton/BallsButton";
 import BallsCardStyled from "./BallsCardStyled";
+import useBallsApi from "../../hooks/useBallsApi";
+import { useCallback } from "react";
 
 interface BallsProps {
   ball: BallsStructure;
 }
 
 const BallsCard = ({ ball }: BallsProps): React.ReactElement => {
+  const dispatch = useDispatch();
+  const { deleteBalls } = useBallsApi();
+  const { setHaveStatus } = useBallsApi();
+
+  const deleteBallsApi = (_id: string): void => {
+    deleteBalls(_id);
+    dispatch(deleteBallsActionCreator(_id));
+  };
+
+  const changeHaveStatus = useCallback(async () => {
+    dispatch(toggleHaveBallsActionCreator(ball._id));
+    await setHaveStatus(ball._id, ball.isTengui);
+  }, [dispatch, ball._id, ball.isTengui, setHaveStatus]);
+
   return (
     <BallsCardStyled className="card">
       <img
@@ -26,6 +47,7 @@ const BallsCard = ({ ball }: BallsProps): React.ReactElement => {
               title="it's have or not checkbox"
               type="checkbox"
               checked={ball.isTengui}
+              onChange={changeHaveStatus}
             />
           </label>
         </li>
@@ -59,7 +81,9 @@ const BallsCard = ({ ball }: BallsProps): React.ReactElement => {
           text="Delete"
           type="button"
           classModifier=""
-          actionOnClick={undefined}
+          actionOnClick={() => {
+            deleteBallsApi(ball._id);
+          }}
         />
       </div>
     </BallsCardStyled>

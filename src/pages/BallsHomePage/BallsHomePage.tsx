@@ -11,9 +11,11 @@ const BallsHomePage = (): React.ReactElement => {
 
   useEffect(() => {
     (async () => {
-      const { balls } = await getBallsApi();
+      const balls = await getBallsApi();
 
-      dispatch(loadBallsActionCreator(balls));
+      if (balls) {
+        dispatch(loadBallsActionCreator(balls.balls));
+      }
     })();
   }, [dispatch, getBallsApi]);
 
