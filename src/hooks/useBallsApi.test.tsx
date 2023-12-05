@@ -19,4 +19,21 @@ describe("Given a useBallsApi custom hook", () => {
       expect(currentBalls).toStrictEqual(expectedBalls);
     });
   });
+
+  describe("When it calls its deleteBall method with an URL and 'Harry Potter crew' id", () => {
+    test("Then it should delete 'Harry Potter crew' ball from Api rest", async () => {
+      const expectedBallId = ballsMock[0]._id;
+      const expectedEmptyObject = {};
+
+      const {
+        result: {
+          current: { deleteBalls },
+        },
+      } = renderHook(() => useBallsApi(), { wrapper: providerWrapper });
+
+      const response = await deleteBalls(expectedBallId);
+
+      expect(response).toStrictEqual(expectedEmptyObject);
+    });
+  });
 });
