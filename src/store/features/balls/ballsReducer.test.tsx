@@ -4,7 +4,6 @@ import {
   ballsReducer,
   deleteBallsActionCreator,
   loadBallsActionCreator,
-  toggleHaveBallsActionCreator,
 } from "./ballsSlice";
 
 describe("Given a ballsReducer", () => {
@@ -48,16 +47,16 @@ describe("Given a ballsReducer", () => {
       const initialState: BallsStateStructure = {
         balls: ballsMock,
       };
+      const expectedDeletedBalls = "Harry Potter crew";
       const expectedBallId = "656241b0c4ddfcae991f0b13";
-      const expectedIsTenguiState = false;
 
       const currentBallState = ballsReducer(
         initialState,
-        toggleHaveBallsActionCreator(expectedBallId),
+        deleteBallsActionCreator(expectedBallId),
       );
 
       currentBallState.balls.forEach((ball) => {
-        expect(ball.isTengui).toBe(expectedIsTenguiState);
+        expect(ball).not.toHaveProperty("name", expectedDeletedBalls);
       });
     });
   });
