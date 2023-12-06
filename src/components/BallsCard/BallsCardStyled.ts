@@ -31,6 +31,11 @@ const BallsCardStyled = styled.article`
       margin-left: 20px;
       margin-right: 20px;
       margin-bottom: 16px;
+
+      &--collection {
+        line-break: auto;
+        text-align: end;
+      }
     }
 
     &__checkbox {
@@ -39,11 +44,6 @@ const BallsCardStyled = styled.article`
       height: 20px;
       accent-color: ${({ theme }) => theme.color.buttonHaveOK};
     }
-  }
-
-  &__collection {
-    line-break: auto;
-    text-align: end;
   }
 
   .buttons {
