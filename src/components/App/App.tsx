@@ -1,9 +1,11 @@
 import { Navigate, Route, Routes } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
 import BallsHeader from "../BallsHeader/BallsHeader";
 import BallsHomePage from "../../pages/BallsHomePage/BallsHomePage";
 import MainContainerStyled from "../../styles/shared/MainContainerStyled";
 import BallsLoading from "../BallsLoading/BallsLoading";
 import { useAppSelector } from "../../store/hooks";
+import ToastStyled from "../../styles/shared/ToastStyled";
 
 const App = (): React.ReactElement => {
   const uiState = useAppSelector((state) => state.uiState);
@@ -12,6 +14,7 @@ const App = (): React.ReactElement => {
     <>
       <BallsHeader />
       {uiState.isLoading && <BallsLoading />}
+      <ToastStyled icon={false} autoClose={5000} />
       <MainContainerStyled>
         <Routes>
           <Route path="/" element={<Navigate to="/balls" />} />

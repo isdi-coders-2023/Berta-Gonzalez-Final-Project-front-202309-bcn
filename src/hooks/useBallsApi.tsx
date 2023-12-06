@@ -9,6 +9,7 @@ import {
   hideLoadingActionCreator,
   showLoadingActionCreator,
 } from "../store/features/ui/uiSlice";
+import { toast } from "react-toastify";
 
 const useBallsApi = () => {
   axios.defaults.baseURL = import.meta.env.VITE_API_URL;
@@ -30,44 +31,67 @@ const useBallsApi = () => {
       return balls;
     } catch {
       dispatch(hideLoadingActionCreator());
+
+      toast.error("Nerdmas Balls could not be loaded", {
+        position: toast.POSITION.TOP_RIGHT,
+        className: "toast toast--fail",
+      });
     }
   }, [dispatch]);
 
   const deleteBalls = useCallback(
     async (id: string): Promise<void> => {
-      dispatch(showLoadingActionCreator());
+      try {
+        dispatch(showLoadingActionCreator());
 
-      const { data } = await axios.delete(`/balls/${id}`);
+        const { data } = await axios.delete(`/balls/${id}`);
+        toast.success("Nerdmas Ball deleted successfully", {
+          position: toast.POSITION.TOP_RIGHT,
+          className: "toast toast--success",
+        });
 
-      dispatch(hideLoadingActionCreator());
+        dispatch(hideLoadingActionCreator());
 
-      return data;
+        return data;
+      } catch {
+        dispatch(hideLoadingActionCreator());
+
+        toast.error("Nerdmas Ball could not be deleted", {
+          position: toast.POSITION.TOP_RIGHT,
+          className: "toast toast--fail",
+        });
+      }
     },
     [dispatch],
   );
 
-  const setHaveStatus = useCallback(
+  const setToggleIsTengui = useCallback(
     async (ballId: string, isTengui: boolean): Promise<void> => {
       dispatch(showLoadingActionCreator());
 
-      axios
-        .patch(`/balls`, {
+      try {
+        await axios.patch(`/balls`, {
           isTengui: !isTengui,
           _id: ballId,
-        })
-        .then((response) => {
-          return response.data;
-        })
-        .catch((error) => {
-          throw new Error(error);
         });
 
-      dispatch(hideLoadingActionCreator());
+        dispatch(hideLoadingActionCreator());
+        toast.success("Nerdmas Ball change successfully", {
+          position: toast.POSITION.TOP_RIGHT,
+          className: "toast toast--success",
+        });
+      } catch {
+        dispatch(hideLoadingActionCreator());
+        toast.error("Nerdmas Ball could not be changed", {
+          position: toast.POSITION.TOP_RIGHT,
+          className: "toast toast--fail",
+        });
+      }
     },
     [dispatch],
   );
 
-  return { getBallsApi, deleteBalls, setHaveStatus };
+  return { getBallsApi, deleteBalls, setToggleIsTengui };
 };
 
 export default useBallsApi;

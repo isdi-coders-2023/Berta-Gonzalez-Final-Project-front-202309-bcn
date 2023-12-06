@@ -40,6 +40,8 @@ const GlobalStyle = createGlobalStyle`
     font: inherit;
     cursor: pointer;
   }
+
+  
 `;
 
 export default GlobalStyle;

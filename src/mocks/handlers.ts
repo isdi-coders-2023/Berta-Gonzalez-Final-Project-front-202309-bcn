@@ -3,14 +3,18 @@ import ballsMock from "./ballsMock";
 
 const urlApi = import.meta.env.VITE_API_URL;
 
-const handler = [
+export const handler = [
   http.get(`${urlApi}/balls`, () => {
     return HttpResponse.json(ballsMock);
   }),
 
-  http.delete(`${urlApi}/balls/656241b0c4ddfcae991f0b13`, () =>
-    HttpResponse.json({}),
-  ),
+  http.delete(`${urlApi}/balls/:id`, () => HttpResponse.json({})),
+
+  http.patch(`${urlApi}/balls`, () => HttpResponse.json({})),
 ];
 
-export default handler;
+export const errorHandlers = [
+  http.get(`${urlApi}/balls`, () => HttpResponse.error()),
+  http.delete(`${urlApi}/balls/:id`, () => HttpResponse.error()),
+  http.patch(`${urlApi}/balls`, () => HttpResponse.error()),
+];
