@@ -10,6 +10,7 @@ import { BallsStructure } from "../store/features/balls/types";
 import { MemoryRouter } from "react-router";
 import { uiReducer } from "../store/features/ui/uiSlice";
 import { PropsWithChildren } from "react";
+import { ToastContainer } from "react-toastify";
 
 export const customRender = (
   children: React.ReactElement,
@@ -30,6 +31,7 @@ export const customRender = (
     <MemoryRouter>
       <Provider store={mockStore}>
         <ThemeProvider theme={mainTheme}>
+          <ToastContainer />
           <GlobalStyle />
           {children}
         </ThemeProvider>
