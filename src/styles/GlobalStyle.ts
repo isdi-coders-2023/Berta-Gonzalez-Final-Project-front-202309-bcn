@@ -41,6 +41,12 @@ const GlobalStyle = createGlobalStyle`
     cursor: pointer;
   }
 
+  input, 
+  textarea {
+    font: inherit;
+    border: none;
+  }
+
   
 `;
 

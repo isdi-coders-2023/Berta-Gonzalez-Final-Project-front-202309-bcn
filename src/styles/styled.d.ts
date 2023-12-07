@@ -8,6 +8,7 @@ declare module "styled-components" {
       darkFontColor: string;
       mainColor: string;
       secondaryColor: string;
+      formBackground: string;
       buttonMainColor: string;
       buttonDesableColor: string;
       buttonHaveOK: string;

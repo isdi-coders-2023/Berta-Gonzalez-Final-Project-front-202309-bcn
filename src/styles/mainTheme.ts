@@ -7,6 +7,7 @@ const mainTheme: DefaultTheme = {
     darkFontColor: "#000",
     mainColor: "#c9dbd1",
     secondaryColor: "#d77a7a",
+    formBackground: "#e4ede8",
     buttonMainColor: "#d77a7a",
     buttonDesableColor: "#eec8c8",
     buttonHaveOK: "#b1cbbb",
