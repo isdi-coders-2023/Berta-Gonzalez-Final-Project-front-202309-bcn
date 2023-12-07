@@ -6,6 +6,7 @@ const BallsAddPageStyled = styled.main`
 
   .addpage-text {
     margin-bottom: 25px;
+
     font-size: 1.438rem;
     font-weight: 400;
   }
