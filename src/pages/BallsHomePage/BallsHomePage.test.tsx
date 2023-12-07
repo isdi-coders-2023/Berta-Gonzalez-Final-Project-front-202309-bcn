@@ -1,4 +1,4 @@
-import { screen } from "@testing-library/dom";
+import { screen } from "@testing-library/react";
 import { customRender } from "../../testUtils/customRender";
 import BallsHomePage from "./BallsHomePage";
 import ballsMock from "../../mocks/ballsMock";

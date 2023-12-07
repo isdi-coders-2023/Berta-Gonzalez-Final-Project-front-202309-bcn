@@ -11,6 +11,7 @@ const BallsNavMenuStyled = styled.nav`
   background-color: ${({ theme }) => theme.color.secondaryColor};
 
   .navigation {
+    color: ${({ theme }) => theme.color.darkFontColor};
     display: flex;
     flex-direction: row;
 

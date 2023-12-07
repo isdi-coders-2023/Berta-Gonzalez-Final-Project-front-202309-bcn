@@ -6,6 +6,7 @@ import MainContainerStyled from "../../styles/shared/MainContainerStyled";
 import BallsLoading from "../BallsLoading/BallsLoading";
 import { useAppSelector } from "../../store/hooks";
 import ToastStyled from "../../styles/shared/ToastStyled";
+import BallsAddPage from "../../pages/BallsAddPage/BallsAddPage";
 
 const App = (): React.ReactElement => {
   const uiState = useAppSelector((state) => state.uiState);
@@ -19,6 +20,7 @@ const App = (): React.ReactElement => {
         <Routes>
           <Route path="/" element={<Navigate to="/balls" />} />
           <Route path="/balls" element={<BallsHomePage />} />
+          <Route path="/add" element={<BallsAddPage />} />
         </Routes>
       </MainContainerStyled>
     </>
