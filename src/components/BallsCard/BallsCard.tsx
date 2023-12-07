@@ -74,22 +74,11 @@ const BallsCard = ({
         </li>
       </ul>
       <div className="buttons">
-        <BallsButton
-          text="Info"
-          type="button"
-          classModifier=""
-          actionOnClick={undefined}
-        />
-        <BallsButton
-          text="Modify"
-          type="button"
-          classModifier=""
-          actionOnClick={undefined}
-        />
+        <BallsButton text="Info" type="button" actionOnClick={undefined} />
+        <BallsButton text="Modify" type="button" actionOnClick={undefined} />
         <BallsButton
           text="Delete"
           type="button"
-          classModifier=""
           actionOnClick={deleteBallsApi}
         />
       </div>
