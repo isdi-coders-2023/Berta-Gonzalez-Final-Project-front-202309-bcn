@@ -4,8 +4,9 @@ const mainTheme: DefaultTheme = {
   color: {
     mainFontColor: "#45484a",
     lightFontColor: "#fff",
+    darkFontColor: "#000",
     mainColor: "#c9dbd1",
-    secondaryColor: "#dc8989",
+    secondaryColor: "#d77a7a",
     buttonMainColor: "#d77a7a",
     buttonDesableColor: "#eec8c8",
     buttonHaveOK: "#b1cbbb",
