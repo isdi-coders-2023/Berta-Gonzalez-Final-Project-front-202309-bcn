@@ -12,11 +12,7 @@ describe("Given a Button component", () => {
       const expectedButtonText = "info";
 
       customRender(
-        <BallsButton
-          text={expectedButtonText}
-          type="button"
-          classModifier=""
-        />,
+        <BallsButton text={expectedButtonText} type="button" />,
         mockData,
       );
       const button = screen.getByRole("button", { name: expectedButtonText });
@@ -35,7 +31,6 @@ describe("Given a Button component", () => {
           text={buttonText}
           actionOnClick={deleteActionMock}
           type="button"
-          classModifier="--disabled"
         />,
         mockData,
       );

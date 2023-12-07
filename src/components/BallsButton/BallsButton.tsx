@@ -3,18 +3,21 @@ import BallsButtonStyled from "./BallsButtonStyled";
 interface BallsButtonProps {
   text: string;
   type: "submit" | "button";
+  isDisabled?: boolean;
   actionOnClick?: () => void;
-  classModifier: "--disabled" | "";
+  className?: string;
 }
 
 const BallsButton = ({
   text,
   type,
+  isDisabled,
   actionOnClick,
-  classModifier,
+  className,
 }: BallsButtonProps): React.ReactElement => (
   <BallsButtonStyled
-    className={`button ${classModifier ? "button--" + classModifier : ""}`}
+    className={className}
+    disabled={isDisabled}
     type={type}
     onClick={actionOnClick}
   >
