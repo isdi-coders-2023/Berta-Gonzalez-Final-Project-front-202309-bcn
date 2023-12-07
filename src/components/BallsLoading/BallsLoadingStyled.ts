@@ -5,8 +5,9 @@ const BallsLoadingStyled = styled.div`
   flex-direction: column;
   align-items: center;
   position: fixed;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
+  background-color: ${({ theme }) => theme.color.lightFontColor};
 
   .loading {
     &__text {
