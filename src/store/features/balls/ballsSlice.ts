@@ -23,6 +23,10 @@ const ballsSlice = createSlice({
       ...currentState,
       balls: currentState.balls.filter((ball) => ball._id !== action.payload),
     }),
+    addBall: (currentState, action: PayloadAction<BallsStructure>) => ({
+      ...currentState,
+      balls: [...currentState.balls, action.payload],
+    }),
     toggleHaveBalls: (
       currentState,
       action: PayloadAction<string>,
@@ -39,6 +43,7 @@ const ballsSlice = createSlice({
 export const {
   loadBalls: loadBallsActionCreator,
   deleteBalls: deleteBallsActionCreator,
+  addBall: addBallActionCreator,
   toggleHaveBalls: toggleHaveBallsActionCreator,
 } = ballsSlice.actions;
 export const ballsReducer = ballsSlice.reducer;

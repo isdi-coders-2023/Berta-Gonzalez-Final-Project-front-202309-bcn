@@ -1,6 +1,7 @@
-import ballsMock from "../../../mocks/ballsMock";
-import { BallsStateStructure } from "./types";
+import { ballAddMock, ballsMock } from "../../../mocks/ballsMock";
+import { BallsStateStructure, BallsStructure } from "./types";
 import {
+  addBallActionCreator,
   ballsReducer,
   deleteBallsActionCreator,
   loadBallsActionCreator,
@@ -42,6 +43,24 @@ describe("Given a deleteBalls minireducer", () => {
       currentBallState.balls.forEach((ball) => {
         expect(ball).not.toHaveProperty("name", expectedDeletedBalls);
       });
+    });
+  });
+});
+
+describe("Given a addBalls minireducer", () => {
+  describe("When it receives a balls list, and a 'Never ending story' ball and the action addBall", () => {
+    test("Then it should return the balls full list with 'Never ending story' ball added", () => {
+      const mockData = ballsMock;
+      const newBallmock = ballAddMock;
+      const initialState: BallsStateStructure = { balls: mockData };
+      const newBall: BallsStructure = ballAddMock[3];
+
+      const currentBallState = ballsReducer(
+        initialState,
+        addBallActionCreator(newBall),
+      );
+
+      expect(currentBallState.balls).toStrictEqual(newBallmock);
     });
   });
 });

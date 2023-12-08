@@ -1,6 +1,6 @@
 import { BallsStructure } from "../store/features/balls/types";
 
-const ballsMock: BallsStructure[] = [
+export const ballsMock: BallsStructure[] = [
   {
     _id: "656241b0c4ddfcae991f0b13",
     ballName: "Harry Potter crew",
@@ -40,4 +40,20 @@ const ballsMock: BallsStructure[] = [
   },
 ];
 
-export default ballsMock;
+export const ballAddMock: BallsStructure[] = [
+  ballsMock[0],
+  ballsMock[1],
+  ballsMock[2],
+  {
+    _id: "65624190453433ror943",
+    ballName: "Gremlins",
+    isAvailable: true,
+    collection: "Gremlins",
+    shop: "Amazon",
+    yearRelease: 2020,
+    price: 30.99,
+    imageUrl: "https://i.ibb.co/bQJ5gkZ/gremlins.webp",
+    description: "Gremlins main cast plastic figures",
+    isTengui: true,
+  },
+];

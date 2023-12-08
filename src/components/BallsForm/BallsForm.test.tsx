@@ -1,4 +1,4 @@
-import { screen, waitFor } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import { customRenderWithoutRouter } from "../../testUtils/customRender";
 import BallsForm from "./BallsForm";
 import userEvent from "@testing-library/user-event";
@@ -54,7 +54,7 @@ describe("Given a BallsForm component", () => {
 
       const inputText = screen.getByDisplayValue(expectInputText);
 
-      await waitFor(() => expect(inputText));
+      expect(inputText).toBeInTheDocument();
     });
   });
 });

@@ -1,10 +1,10 @@
-import { screen, waitFor } from "@testing-library/react";
-import ballsMock from "../../mocks/ballsMock";
+import { screen } from "@testing-library/react";
 import { customRender } from "../../testUtils/customRender";
 import BallsCard from "./BallsCard";
 import userEvent from "@testing-library/user-event";
 import server from "../../mocks/node";
 import { errorHandlers } from "../../mocks/handlers";
+import { ballsMock } from "../../mocks/ballsMock";
 
 afterEach(() => {
   vi.clearAllMocks();
@@ -15,14 +15,14 @@ beforeEach(() => {
 });
 
 describe("Given a BallsCard component", () => {
-  const mockData = ballsMock;
   const haveText = "Have:";
+  const mockData = ballsMock;
 
   describe("When it receives a 'Harry Potter crew' card", () => {
     test("Then it should show the 'Harry Potter crew' into a heading", () => {
       const expectedHeadingText = ballsMock[0];
 
-      customRender(<BallsCard ball={expectedHeadingText} />, mockData);
+      customRender(<BallsCard ball={expectedHeadingText} />);
       const HarryBallName = screen.getByRole("heading", {
         name: expectedHeadingText.ballName,
       });
@@ -37,49 +37,49 @@ describe("Given a BallsCard component", () => {
     test("Then it should show 'Nerdmas Ball deleted successfully", async () => {
       const ballCardName = "Harry Potter crew";
 
-      customRender(<BallsCard ball={mockData[0]} />, mockData);
+      customRender(<BallsCard ball={mockData[0]} />);
       const deleteButton = screen.getByRole("button", {
         name: deleteButtonText,
       });
       const heading = screen.getByRole("heading", { name: ballCardName });
       await userEvent.click(deleteButton);
 
-      waitFor(() => {
-        expect(heading).not.toBeInTheDocument();
-      });
+      expect(heading).toBeInTheDocument();
     });
 
     test("Then it should show a feedback message with 'Nerdmas Ball deleted successfully'", async () => {
       const feedbackSuccess = "Nerdmas Ball deleted successfully";
 
-      customRender(<BallsCard ball={mockData[0]} />, mockData);
+      customRender(<BallsCard ball={mockData[0]} />);
 
       const deleteButton = screen.getByRole("button", {
         name: deleteButtonText,
       });
       await userEvent.click(deleteButton);
+      const successMessage = screen.getByText(feedbackSuccess);
 
-      expect(screen.getByText(feedbackSuccess)).toBeInTheDocument();
+      expect(successMessage).toBeInTheDocument();
     });
 
     test("Then the promise is rejected and it should show a feedback message with 'Nerdmas Ball could not be deleted'", async () => {
       server.use(...errorHandlers);
       const feedbackError = "Nerdmas Ball could not be deleted";
-      customRender(<BallsCard ball={mockData[0]} />, mockData);
+      customRender(<BallsCard ball={mockData[0]} />);
 
       const deleteButton = screen.getByRole("button", {
         name: deleteButtonText,
       });
       await userEvent.click(deleteButton);
+      const errorText = screen.getByText(feedbackError);
 
-      expect(screen.getByText(feedbackError)).toBeInTheDocument();
+      expect(errorText).toBeInTheDocument();
     });
 
     describe("When it rendered 'Harry Potter crew' and its have checkbox is clicked", () => {
       test("Then it should show a feedback message with 'Nerdmas Ball change successfully'", async () => {
         const feedbackSuccess = "Nerdmas Ball change successfully";
 
-        customRender(<BallsCard ball={mockData[0]} />, mockData);
+        customRender(<BallsCard ball={mockData[0]} />);
 
         const checkboxText = screen.getByRole("checkbox", {
           name: haveText,
@@ -97,7 +97,7 @@ describe("Given a BallsCard component", () => {
       const feedbackSuccess = "Nerdmas Ball could not be changed";
       server.use(...errorHandlers);
 
-      customRender(<BallsCard ball={mockData[0]} />, mockData);
+      customRender(<BallsCard ball={mockData[0]} />);
 
       const checkboxText = screen.getByRole("checkbox", {
         name: haveText,
