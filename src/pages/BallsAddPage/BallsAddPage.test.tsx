@@ -1,8 +1,5 @@
 import { screen } from "@testing-library/react";
-import {
-  customRender,
-  customRenderWithoutRouter,
-} from "../../testUtils/customRender";
+import { customRender } from "../../testUtils/customRender";
 import BallsAddPage from "./BallsAddPage";
 
 describe("Given a BallsAddPage component", () => {
@@ -10,7 +7,7 @@ describe("Given a BallsAddPage component", () => {
     test("Then it should show the title 'Add a new Nerdmas Ball' inside a heading", () => {
       const expectedTitle = "Add a new Nerdmas Ball";
 
-      customRenderWithoutRouter(<BallsAddPage />);
+      customRender(<BallsAddPage />);
       const title = screen.getByRole("heading", {
         name: expectedTitle,
       });
