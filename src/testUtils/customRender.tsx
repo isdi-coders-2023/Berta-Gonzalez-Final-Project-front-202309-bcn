@@ -11,6 +11,8 @@ import { MemoryRouter } from "react-router";
 import { uiReducer } from "../store/features/ui/uiSlice";
 import { PropsWithChildren } from "react";
 import { ToastContainer } from "react-toastify";
+import { BrowserRouter } from "react-router-dom";
+import ballsMock from "../mocks/ballsMock";
 
 export const customRender = (
   children: React.ReactElement,
@@ -40,6 +42,33 @@ export const customRender = (
   );
 };
 
+export const customRenderWithoutRouter = (children: React.ReactElement) => {
+  const mockStore = configureStore({
+    reducer: {
+      ballsState: ballsReducer,
+      uiState: uiReducer,
+    },
+    preloadedState: {
+      ballsState: { balls: ballsMock },
+      uiState: { isLoading: false },
+    },
+  });
+
+  render(
+    <Provider store={mockStore}>
+      <ThemeProvider theme={mainTheme}>
+        <ToastContainer />
+        <GlobalStyle />
+        {children}
+      </ThemeProvider>
+    </Provider>,
+  );
+};
+
 export const providerWrapper = ({ children }: PropsWithChildren) => {
-  return <Provider store={store}>{children}</Provider>;
+  return (
+    <BrowserRouter>
+      <Provider store={store}>{children}</Provider>
+    </BrowserRouter>
+  );
 };
