@@ -1,19 +1,15 @@
 import { screen } from "@testing-library/react";
-import { customRender } from "../../testUtils/customRender";
+import { customRenderWithoutRouter } from "../../testUtils/customRender";
 import BallsButton from "./BallsButton";
-import ballsMock from "../../mocks/ballsMock";
 import userEvent from "@testing-library/user-event";
 
 describe("Given a Button component", () => {
-  const mockData = ballsMock;
-
   describe("When it receives the text 'Info'", () => {
     test("Then it should show the text 'Info'", () => {
       const expectedButtonText = "info";
 
-      customRender(
+      customRenderWithoutRouter(
         <BallsButton text={expectedButtonText} type="button" />,
-        mockData,
       );
       const button = screen.getByRole("button", { name: expectedButtonText });
 
@@ -26,13 +22,12 @@ describe("Given a Button component", () => {
       const buttonText = "Delete";
       const deleteActionMock = vi.fn();
 
-      customRender(
+      customRenderWithoutRouter(
         <BallsButton
           text={buttonText}
           actionOnClick={deleteActionMock}
           type="button"
         />,
-        mockData,
       );
 
       const button = screen.getByRole("button", { name: buttonText });

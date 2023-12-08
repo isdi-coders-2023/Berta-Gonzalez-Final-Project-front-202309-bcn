@@ -4,9 +4,9 @@ import App from "./App";
 import ballsMock from "../../mocks/ballsMock";
 
 describe("Given an App component", () => {
-  describe("When it's rendered", () => {
-    const mockData = ballsMock;
+  const mockData = ballsMock;
 
+  describe("When it's rendered", () => {
     test("Then it should show 'Nerdmas Balls' logo", () => {
       const expectedAltText = "Nerdmas Balls logo";
 

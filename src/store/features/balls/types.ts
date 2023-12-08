@@ -11,6 +11,8 @@ export interface BallsStructure {
   isTengui: boolean;
 }
 
+export type BallWithoutId = Omit<BallsStructure, "_id">;
+
 export interface BallsStateStructure {
   balls: BallsStructure[];
 }
