@@ -1,5 +1,5 @@
 import { http, HttpResponse } from "msw";
-import ballsMock from "./ballsMock";
+import { ballsMock } from "./ballsMock";
 import newAddBallsMock from "./newAddBallsMock";
 
 const urlApi = import.meta.env.VITE_API_URL;

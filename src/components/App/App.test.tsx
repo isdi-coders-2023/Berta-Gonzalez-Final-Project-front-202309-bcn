@@ -1,16 +1,13 @@
 import { screen } from "@testing-library/react";
 import { customRender } from "../../testUtils/customRender";
 import App from "./App";
-import ballsMock from "../../mocks/ballsMock";
 
 describe("Given an App component", () => {
-  const mockData = ballsMock;
-
   describe("When it's rendered", () => {
     test("Then it should show 'Nerdmas Balls' logo", () => {
       const expectedAltText = "Nerdmas Balls logo";
 
-      customRender(<App />, mockData);
+      customRender(<App />);
 
       const altText = screen.getByRole("img", { name: expectedAltText });
 
@@ -22,7 +19,7 @@ describe("Given an App component", () => {
         const homepageTitle = "Mark your have and lack";
         const homeLink = "home";
 
-        customRender(<App />, mockData);
+        customRender(<App />);
         const link = screen.getByRole("link", { name: homeLink });
         const title = screen.getByRole("heading", { name: homepageTitle });
 

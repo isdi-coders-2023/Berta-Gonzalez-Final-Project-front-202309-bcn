@@ -6,18 +6,14 @@ import { ThemeProvider } from "styled-components";
 import mainTheme from "../styles/mainTheme";
 import GlobalStyle from "../styles/GlobalStyle";
 import { ballsReducer } from "../store/features/balls/ballsSlice";
-import { BallsStructure } from "../store/features/balls/types";
 import { MemoryRouter } from "react-router";
 import { uiReducer } from "../store/features/ui/uiSlice";
 import { PropsWithChildren } from "react";
 import { ToastContainer } from "react-toastify";
 import { BrowserRouter } from "react-router-dom";
-import ballsMock from "../mocks/ballsMock";
+import { ballsMock } from "../mocks/ballsMock";
 
-export const customRender = (
-  children: React.ReactElement,
-  ballsMock: BallsStructure[],
-) => {
+export const customRender = (children: React.ReactElement) => {
   const mockStore = configureStore({
     reducer: {
       ballsState: ballsReducer,
