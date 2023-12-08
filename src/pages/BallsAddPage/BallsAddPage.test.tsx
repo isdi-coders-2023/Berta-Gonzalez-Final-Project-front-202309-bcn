@@ -1,5 +1,8 @@
 import { screen } from "@testing-library/react";
-import { customRenderWithoutRouter } from "../../testUtils/customRender";
+import {
+  customRender,
+  customRenderWithoutRouter,
+} from "../../testUtils/customRender";
 import BallsAddPage from "./BallsAddPage";
 
 describe("Given a BallsAddPage component", () => {
@@ -13,6 +16,16 @@ describe("Given a BallsAddPage component", () => {
       });
 
       expect(title).toBeInTheDocument();
+    });
+
+    test("Then it should a form", () => {
+      const expectedLabelText = "Ball Name";
+
+      customRender(<BallsAddPage />);
+
+      const labelText = screen.getByLabelText(expectedLabelText);
+
+      expect(labelText).toBeInTheDocument();
     });
   });
 });
