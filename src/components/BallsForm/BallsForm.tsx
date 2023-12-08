@@ -1,9 +1,16 @@
 import { useState } from "react";
-import { BallWithoutId } from "../../store/features/balls/types";
+import {
+  BallWithoutId,
+  BallsStructure,
+} from "../../store/features/balls/types";
 import BallsButton from "../BallsButton/BallsButton";
 import BallsFormStyled from "./BallsFormStyled";
 
-const BallsForm = (): React.ReactElement => {
+interface BallsFormProps {
+  submitAction: (newBall: BallsStructure) => void;
+}
+
+const BallsForm = ({ submitAction }: BallsFormProps): React.ReactElement => {
   const emptyBall: BallWithoutId = {
     ballName: "",
     isAvailable: false,
@@ -30,25 +37,34 @@ const BallsForm = (): React.ReactElement => {
     });
   };
 
+  const onFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    submitAction(newBall as BallsStructure);
+  };
+
   return (
-    <BallsFormStyled className="form" autoComplete="off">
-      <label htmlFor="ball-name" className="form__label">
+    <BallsFormStyled
+      className="form"
+      onSubmit={onFormSubmit}
+      autoComplete="off"
+    >
+      <label htmlFor="ballName" className="form__label">
         Ball Name
       </label>
       <input
         className="form__input"
         type="text"
-        id="ball-name"
+        id="ballName"
         onChange={onChangeData}
         required
       />
-      <label htmlFor="available" className="form__label">
+      <label htmlFor="isAvailable" className="form__label">
         Is Available
       </label>
       <input
         className="form__input"
         type="text"
-        id="available"
+        id="isAvailable"
         onChange={onChangeData}
         required
       />
@@ -72,13 +88,13 @@ const BallsForm = (): React.ReactElement => {
         onChange={onChangeData}
         required
       />
-      <label htmlFor="year-release" className="form__label">
+      <label htmlFor="yearRelease" className="form__label">
         Year of Release
       </label>
       <input
         className="form__input"
         type="number"
-        id="year-release"
+        id="yearRelease"
         min={0}
         onChange={onChangeData}
         required
@@ -95,13 +111,13 @@ const BallsForm = (): React.ReactElement => {
         onChange={onChangeData}
         required
       />
-      <label htmlFor="image-url" className="form__label">
+      <label htmlFor="imageUrl" className="form__label">
         Image URL
       </label>
       <input
         className="form__input"
         type="url"
-        id="image-url"
+        id="imageUrl"
         onChange={onChangeData}
         required
       />
@@ -115,13 +131,13 @@ const BallsForm = (): React.ReactElement => {
         required
       />
       <div className="form__label form__label--checkbox">
-        <label htmlFor="checkbox" className="form__label">
+        <label htmlFor="isTengui" className="form__label">
           <span>Have</span>
         </label>
         <input
           className="form__checkbox form__label--check"
           type="checkbox"
-          id="checkbox"
+          id="isTengui"
           onChange={onChangeData}
           required
         />
