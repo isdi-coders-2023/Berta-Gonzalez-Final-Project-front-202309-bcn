@@ -46,7 +46,7 @@ const BallsCard = ({
         width="257"
         height="257"
       />
-      <h2 className="card__ball-name">{ballName}</h2>
+      <h2 className="card__ball-name card__ball-name--align">{ballName}</h2>
       <ul className="card__list-container">
         <li className="card__item card__item--label">
           <label className="card__label">
@@ -70,7 +70,7 @@ const BallsCard = ({
         </li>
         <li className="card__item">
           <span>Shop:</span>
-          <span>{shop}</span>
+          <span className="card__item--shop">{shop}</span>
         </li>
       </ul>
       <div className="buttons">
