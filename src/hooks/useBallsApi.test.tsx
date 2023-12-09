@@ -1,7 +1,7 @@
 import { renderHook } from "@testing-library/react";
 import useBallsApi from "./useBallsApi";
 import { providerWrapper } from "../testUtils/customRender";
-import { ballsMock } from "../mocks/ballsMock";
+import { ballAddMock, ballsMock } from "../mocks/ballsMock";
 
 describe("Given a useBallsApi custom hook", () => {
   describe("When it receives information of 'Harry Potter crew', 'My neighbour Totoro' and 'Mario Bros'", () => {
@@ -34,6 +34,22 @@ describe("Given a useBallsApi custom hook", () => {
       const response = await deleteBalls(expectedBallId);
 
       expect(response).toStrictEqual(expectedEmptyObject);
+    });
+  });
+
+  describe("When it calls its addBalls method with a 'Never ending story' ball", () => {
+    const newBall = ballAddMock;
+
+    test("Then it should receive the 'Never ending story' ball from the API rest", async () => {
+      const {
+        result: {
+          current: { addBalls },
+        },
+      } = renderHook(() => useBallsApi(), { wrapper: providerWrapper });
+
+      const response = await addBalls(newBall[3]);
+
+      expect(response).toStrictEqual(newBall);
     });
   });
 });

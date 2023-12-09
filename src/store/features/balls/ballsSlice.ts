@@ -23,7 +23,10 @@ const ballsSlice = createSlice({
       ...currentState,
       balls: currentState.balls.filter((ball) => ball._id !== action.payload),
     }),
-    addBall: (currentState, action: PayloadAction<BallsStructure>) => ({
+    addBall: (
+      currentState: BallsStateStructure,
+      action: PayloadAction<BallsStructure>,
+    ): BallsStateStructure => ({
       ...currentState,
       balls: [...currentState.balls, action.payload],
     }),

@@ -42,7 +42,8 @@ const GlobalStyle = createGlobalStyle`
   }
 
   input, 
-  textarea {
+  textarea,
+  select {
     font: inherit;
     border: none;
   }
