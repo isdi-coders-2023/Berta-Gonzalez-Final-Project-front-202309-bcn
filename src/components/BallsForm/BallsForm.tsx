@@ -151,7 +151,6 @@ const BallsForm = ({ submitAction }: BallsFormProps): React.ReactElement => {
           type="checkbox"
           id="isTengui"
           onChange={onChangeData}
-          required
         />
       </div>
       <div className="form__button">

@@ -17,6 +17,12 @@ const BallsCardStyled = styled.article`
       font-weight: 400;
       text-transform: uppercase;
       margin-top: 12px;
+
+      &--align {
+        overflow-wrap: anywhere;
+        text-align: center;
+        width: 257px;
+      }
     }
 
     &__list-container {
@@ -32,8 +38,10 @@ const BallsCardStyled = styled.article`
       margin-right: 20px;
       margin-bottom: 16px;
 
-      &--collection {
-        line-break: auto;
+      &--collection,
+      &--shop {
+        width: 121px;
+        overflow-wrap: anywhere;
         text-align: end;
       }
     }
