@@ -15,7 +15,7 @@ describe("Given a BallsAddPage component", () => {
       expect(title).toBeInTheDocument();
     });
 
-    test("Then it should a form", () => {
+    test("Then it should a form with a 'Ball Name' lable text", () => {
       const expectedLabelText = "Ball Name";
 
       customRender(<BallsAddPage />);
@@ -23,6 +23,15 @@ describe("Given a BallsAddPage component", () => {
       const labelText = screen.getByLabelText(expectedLabelText);
 
       expect(labelText).toBeInTheDocument();
+    });
+
+    test("Then it should show a button with the text 'Create' inside", () => {
+      const expectedButtonText = "Create";
+
+      customRender(<BallsAddPage />);
+      const buttonText = screen.getByText(expectedButtonText);
+
+      expect(buttonText).toBeInTheDocument();
     });
   });
 });
