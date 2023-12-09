@@ -48,7 +48,7 @@ describe("Given a BallsForm component", () => {
 
   describe("When it's rendered and the user types in all the text input fields", () => {
     test("Then int should show the writen text in the fields", async () => {
-      const expectInputText = "Never ending story";
+      const expectInputText = "Gremlins";
 
       customRenderWithoutRouter(<BallsForm submitAction={actionOnClick} />);
 
@@ -71,6 +71,71 @@ describe("Given a BallsForm component", () => {
       fireEvent.submit(ballForm);
 
       expect(actionOnClick).toHaveBeenCalled();
+    });
+  });
+
+  describe("When it is rendered and the user fills all the inputs and clicks the 'Create' button", () => {
+    test("Then it should call its onSubmit function", async () => {
+      const expectedInputText = "Proof";
+      const expectedInputNumber = 25;
+      const expectedInputBoolean = true;
+      const expectedCheckboxLabelText = "Have";
+      const expectedButtonText = "Create";
+      const ballNameLabelText = "Ball Name";
+      const availableLabelText = "Is Available";
+      const collectionLabelText = "Collection";
+      const shopLabelText = "Shop";
+      const yearReleaseLabelText = "Year of Release";
+      const priceLabelText = "Price in €";
+      const imageUrlLabelText = "Image URL";
+      const descriptionLabelText = "Description";
+
+      customRender(<BallsForm submitAction={actionOnClick} />);
+
+      const inputBallNameElement = screen.getByLabelText(ballNameLabelText);
+      await userEvent.type(inputBallNameElement, expectedInputText);
+
+      const inputAvailableElement = screen.getByLabelText(availableLabelText);
+      await userEvent.type(
+        inputAvailableElement,
+        expectedInputBoolean.toString(),
+      );
+
+      const inputCollectionElement = screen.getByLabelText(collectionLabelText);
+      await userEvent.type(inputCollectionElement, expectedButtonText);
+
+      const inputShopElement = screen.getByLabelText(shopLabelText);
+      await userEvent.type(inputShopElement, expectedButtonText);
+
+      const inputYearReleaseElement =
+        screen.getByLabelText(yearReleaseLabelText);
+      await userEvent.type(
+        inputYearReleaseElement,
+        expectedInputNumber.toString(),
+      );
+
+      const inputPriceElement = screen.getByLabelText(priceLabelText);
+      await userEvent.type(inputPriceElement, expectedInputNumber.toString());
+
+      const inputImageUrlElement = screen.getByLabelText(imageUrlLabelText);
+      await userEvent.type(inputImageUrlElement, expectedButtonText);
+
+      const inputDescriptionElement =
+        screen.getByLabelText(descriptionLabelText);
+      await userEvent.type(inputDescriptionElement, expectedButtonText);
+
+      const formCheckboxElement = screen.getByRole("checkbox", {
+        name: expectedCheckboxLabelText,
+      });
+
+      const formButtonElement = screen.getByRole("button", {
+        name: expectedButtonText,
+      });
+
+      await userEvent.click(formCheckboxElement);
+      await userEvent.click(formButtonElement);
+
+      await expect(actionOnClick).toHaveBeenCalled();
     });
   });
 });

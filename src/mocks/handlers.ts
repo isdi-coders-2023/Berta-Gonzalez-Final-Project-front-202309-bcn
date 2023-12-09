@@ -1,6 +1,5 @@
 import { http, HttpResponse } from "msw";
-import { ballsMock } from "./ballsMock";
-import newAddBallsMock from "./newAddBallsMock";
+import { ballAddMock, ballsMock } from "./ballsMock";
 
 const urlApi = import.meta.env.VITE_API_URL;
 
@@ -14,7 +13,7 @@ export const handler = [
   http.patch(`${urlApi}/balls`, () => HttpResponse.json({})),
 
   http.post(`${urlApi}/balls/add`, () =>
-    HttpResponse.json({ ball: newAddBallsMock }),
+    HttpResponse.json({ ball: ballAddMock }),
   ),
 ];
 
@@ -22,5 +21,5 @@ export const errorHandlers = [
   http.get(`${urlApi}/balls`, () => HttpResponse.error()),
   http.delete(`${urlApi}/balls/:id`, () => HttpResponse.error()),
   http.patch(`${urlApi}/balls`, () => HttpResponse.error()),
-  http.post(`${urlApi}/balls/add`, () => HttpResponse.error()),
+  http.post(`${urlApi}/add`, () => HttpResponse.error()),
 ];
