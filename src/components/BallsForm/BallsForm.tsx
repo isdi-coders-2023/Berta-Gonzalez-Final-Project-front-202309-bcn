@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   BallWithoutId,
   BallsStructure,
@@ -37,6 +37,12 @@ const BallsForm = ({ submitAction }: BallsFormProps): React.ReactElement => {
     });
   };
 
+  useEffect(() => {
+    const newBallValues = Object.values(newBall);
+
+    newBallValues.every((value) => value !== "");
+  });
+
   const onFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     submitAction(newBall as BallsStructure);
@@ -61,13 +67,17 @@ const BallsForm = ({ submitAction }: BallsFormProps): React.ReactElement => {
       <label htmlFor="isAvailable" className="form__label">
         Is Available
       </label>
-      <input
-        className="form__input"
-        type="text"
-        id="isAvailable"
-        onChange={onChangeData}
-        required
-      />
+      <select className="form__input" id="isAvailable" required>
+        <option value="options" className="form__input">
+          Select
+        </option>
+        <option value="yes" className="form__input">
+          Yes
+        </option>
+        <option value="no" className="form__input">
+          No
+        </option>
+      </select>
       <label htmlFor="collection" className="form__label">
         Collection
       </label>
@@ -95,7 +105,9 @@ const BallsForm = ({ submitAction }: BallsFormProps): React.ReactElement => {
         className="form__input"
         type="number"
         id="yearRelease"
-        min={0}
+        step={1}
+        min={1900}
+        max={2023}
         onChange={onChangeData}
         required
       />
