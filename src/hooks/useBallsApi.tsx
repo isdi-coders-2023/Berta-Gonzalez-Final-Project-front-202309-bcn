@@ -20,6 +20,7 @@ export interface UseBallsApiStructure {
   addBalls: (
     ball: BallWithoutId,
   ) => Promise<{ ball: BallsStructure } | undefined>;
+  loadSelectedBall: () => Promise<BallsStructure | void>;
 }
 axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 
@@ -35,6 +36,7 @@ const useBallsApi = () => {
     try {
       const { data: balls } = await axios.get<{
         balls: BallsStructure[];
+        selectedBall: BallsStructure;
       }>("/balls");
 
       dispatch(hideLoadingActionCreator());
@@ -107,6 +109,29 @@ const useBallsApi = () => {
     [dispatch, navigate],
   );
 
+  const loadSelectedBall = useCallback(
+    async (ballId: string): Promise<BallsStructure | undefined> => {
+      try {
+        dispatch(showLoadingActionCreator());
+
+        const {
+          data: { ball },
+        } = await axios.get<{ ball: BallsStructure }>(`/balls/${ballId}`);
+
+        dispatch(hideLoadingActionCreator());
+
+        return ball;
+      } catch (error) {
+        dispatch(hideLoadingActionCreator());
+        toast.error("Fail to select this Nerdmas Ball info", {
+          position: toast.POSITION.TOP_CENTER,
+          className: "toast toast--fail",
+        });
+      }
+    },
+    [dispatch],
+  );
+
   const setToggleIsTengui = useCallback(
     async (ballId: string, isTengui: boolean): Promise<void> => {
       try {
@@ -130,7 +155,13 @@ const useBallsApi = () => {
     [dispatch],
   );
 
-  return { getBallsApi, deleteBalls, setToggleIsTengui, addBalls };
+  return {
+    getBallsApi,
+    deleteBalls,
+    setToggleIsTengui,
+    addBalls,
+    loadSelectedBall,
+  };
 };
 
 export default useBallsApi;
