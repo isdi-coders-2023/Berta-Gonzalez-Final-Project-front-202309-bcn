@@ -7,7 +7,7 @@ const BallsLoading = (): React.ReactElement => {
       <img
         className="loading__image"
         alt="loading"
-        src="images/loading.webp"
+        src="/images/loading.webp"
         width="200"
         height="300"
       />
