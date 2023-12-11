@@ -24,7 +24,7 @@ const BallDetailPage = (): React.ReactElement => {
   useEffect(() => {
     (async () => {
       if (ballId) {
-        const selectedBall = await loadSelectedBall(ballId as string);
+        const selectedBall = await loadSelectedBall(ballId);
         dispatch(loadSelectedBallActionCreator(selectedBall as BallsStructure));
         setIsTengui(ball.isTengui);
       }
