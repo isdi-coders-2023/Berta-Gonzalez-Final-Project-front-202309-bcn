@@ -3,6 +3,7 @@ import { BallsStateStructure, BallsStructure } from "./types";
 
 const initialBallsSlice: BallsStateStructure = {
   balls: [],
+  selectedBall: {} as BallsStructure,
 };
 
 const ballsSlice = createSlice({
@@ -30,6 +31,13 @@ const ballsSlice = createSlice({
       ...currentState,
       balls: [...currentState.balls, action.payload],
     }),
+    loadSelectedBall: (
+      currentState,
+      action: PayloadAction<BallsStructure>,
+    ) => ({
+      ...currentState,
+      selectedBall: action.payload,
+    }),
     toggleHaveBalls: (
       currentState,
       action: PayloadAction<string>,
@@ -47,6 +55,7 @@ export const {
   loadBalls: loadBallsActionCreator,
   deleteBalls: deleteBallsActionCreator,
   addBall: addBallActionCreator,
+  loadSelectedBall: loadSelectedBallActionCreator,
   toggleHaveBalls: toggleHaveBallsActionCreator,
 } = ballsSlice.actions;
 export const ballsReducer = ballsSlice.reducer;
