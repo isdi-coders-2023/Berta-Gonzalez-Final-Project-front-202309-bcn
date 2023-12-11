@@ -13,6 +13,7 @@ const BallsCardStyled = styled.article`
     }
 
     &__ball-name {
+      align-items: center;
       font-size: 1.688rem;
       font-weight: 400;
       text-transform: uppercase;
@@ -47,7 +48,7 @@ const BallsCardStyled = styled.article`
     }
 
     &__checkbox {
-      margin-left: 151px;
+      margin-left: 121px;
       width: 20px;
       height: 20px;
       accent-color: ${({ theme }) => theme.color.buttonHaveOK};

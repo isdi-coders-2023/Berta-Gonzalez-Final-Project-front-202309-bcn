@@ -15,4 +15,5 @@ export type BallWithoutId = Omit<BallsStructure, "_id">;
 
 export interface BallsStateStructure {
   balls: BallsStructure[];
+  selectedBall: BallsStructure;
 }

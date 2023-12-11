@@ -6,7 +6,7 @@ const BallsHeader = (): React.ReactElement => {
     <BallsHeaderStyled className="header">
       <img
         className="logo"
-        src="images/logo.webp"
+        src="/images/logo.webp"
         alt="Nerdmas Balls logo"
         width="240"
         height="51"

@@ -1,6 +1,13 @@
-import { screen } from "@testing-library/react";
-import { customRender } from "../../testUtils/customRender";
+import { renderHook, screen } from "@testing-library/react";
+import {
+  customRender,
+  customRenderWithoutRouter,
+} from "../../testUtils/customRender";
 import App from "./App";
+import { MemoryRouter } from "react-router-dom";
+import useBallsApi from "../../hooks/useBallsApi";
+import { gremlinsMock } from "../../mocks/ballsMock";
+import { providerWrapper } from "../../testUtils/customWrapper";
 
 describe("Given an App component", () => {
   describe("When it's rendered", () => {
@@ -26,6 +33,30 @@ describe("Given an App component", () => {
         expect(title).toBeInTheDocument();
         expect(link).toBeInTheDocument();
       });
+    });
+  });
+
+  describe("When it is called with its addBalls function with 'Gremlins' and the response fail", () => {
+    test("Then it should show the text 'Nerdmas Ball added successfully'", async () => {
+      const path = "/add";
+      const errorMessage = "Nerdmas Ball added successfully";
+
+      customRenderWithoutRouter(
+        <MemoryRouter initialEntries={[path]}>
+          <App />
+        </MemoryRouter>,
+      );
+
+      const {
+        result: {
+          current: { addBalls },
+        },
+      } = renderHook(() => useBallsApi(), { wrapper: providerWrapper });
+
+      await addBalls(gremlinsMock);
+      const failFeedback = await screen.findByText(errorMessage);
+
+      expect(failFeedback).toBeInTheDocument();
     });
   });
 });

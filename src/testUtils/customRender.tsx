@@ -1,17 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { render } from "@testing-library/react";
 import { Provider } from "react-redux";
-import { store } from "../store";
 import { ThemeProvider } from "styled-components";
 import mainTheme from "../styles/mainTheme";
 import GlobalStyle from "../styles/GlobalStyle";
 import { ballsReducer } from "../store/features/balls/ballsSlice";
 import { MemoryRouter } from "react-router";
 import { uiReducer } from "../store/features/ui/uiSlice";
-import { PropsWithChildren } from "react";
-import { ToastContainer } from "react-toastify";
-import { BrowserRouter } from "react-router-dom";
 import { ballsMock } from "../mocks/ballsMock";
+import { BallsStructure } from "../store/features/balls/types";
+import ToastStyled from "../styles/shared/ToastStyled";
+import ScrollToTop from "../utils/ScrollToTopFunction";
 
 export const customRender = (children: React.ReactElement) => {
   const mockStore = configureStore({
@@ -20,7 +19,10 @@ export const customRender = (children: React.ReactElement) => {
       uiState: uiReducer,
     },
     preloadedState: {
-      ballsState: { balls: ballsMock },
+      ballsState: {
+        balls: ballsMock,
+        selectedBall: {} as BallsStructure,
+      },
       uiState: { isLoading: false },
     },
   });
@@ -29,7 +31,8 @@ export const customRender = (children: React.ReactElement) => {
     <MemoryRouter>
       <Provider store={mockStore}>
         <ThemeProvider theme={mainTheme}>
-          <ToastContainer />
+          <ToastStyled />
+          <ScrollToTop />
           <GlobalStyle />
           {children}
         </ThemeProvider>
@@ -45,26 +48,18 @@ export const customRenderWithoutRouter = (children: React.ReactElement) => {
       uiState: uiReducer,
     },
     preloadedState: {
-      ballsState: { balls: ballsMock },
+      ballsState: {
+        balls: ballsMock,
+        selectedBall: {} as BallsStructure,
+      },
       uiState: { isLoading: false },
     },
   });
 
   render(
-    <Provider store={mockStore}>
-      <ThemeProvider theme={mainTheme}>
-        <ToastContainer />
-        <GlobalStyle />
-        {children}
-      </ThemeProvider>
-    </Provider>,
-  );
-};
-
-export const providerWrapper = ({ children }: PropsWithChildren) => {
-  return (
-    <BrowserRouter>
-      <Provider store={store}>{children}</Provider>
-    </BrowserRouter>
+    <ThemeProvider theme={mainTheme}>
+      <GlobalStyle />
+      <Provider store={mockStore}>{children}</Provider>
+    </ThemeProvider>,
   );
 };
