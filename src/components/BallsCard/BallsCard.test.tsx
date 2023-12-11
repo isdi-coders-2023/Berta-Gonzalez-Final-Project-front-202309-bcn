@@ -1,10 +1,14 @@
 import { screen } from "@testing-library/react";
-import { customRender } from "../../testUtils/customRender";
+import {
+  customRender,
+  customRenderWithoutRouter,
+} from "../../testUtils/customRender";
 import BallsCard from "./BallsCard";
 import userEvent from "@testing-library/user-event";
 import server from "../../mocks/node";
 import { errorHandlers } from "../../mocks/handlers";
-import { ballsMock } from "../../mocks/ballsMock";
+import { ballsMock, harryPotterMock } from "../../mocks/ballsMock";
+import { MemoryRouter } from "react-router-dom";
 
 afterEach(() => {
   vi.clearAllMocks();
@@ -108,6 +112,37 @@ describe("Given a BallsCard component", () => {
       const feedbackMessage = screen.getByText(feedbackSuccess);
 
       expect(feedbackMessage).toBeInTheDocument();
+    });
+  });
+
+  describe("When the user clicks in 'Info' button", () => {
+    test("Then it should be a link", () => {
+      const textButton = "Info";
+      customRenderWithoutRouter(
+        <MemoryRouter initialEntries={["/balls/656241b0c4ddfcae991f0b13"]}>
+          <BallsCard ball={harryPotterMock} />
+        </MemoryRouter>,
+      );
+
+      const link = screen.getByRole("button", { name: textButton });
+
+      expect(link).toBeInTheDocument();
+    });
+  });
+
+  describe("When the user clicks on the 'Info' button", () => {
+    test("Then it should be redirected to 'Harry Potter crew' detail page", () => {
+      const expectedTitle = "Harry Potter crew";
+
+      customRenderWithoutRouter(
+        <MemoryRouter initialEntries={["/balls/656241b0c4ddfcae991f0b13"]}>
+          <BallsCard ball={harryPotterMock} />
+        </MemoryRouter>,
+      );
+
+      const title = screen.getByRole("heading", { name: expectedTitle });
+
+      expect(title).toBeInTheDocument();
     });
   });
 });
