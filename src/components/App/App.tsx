@@ -2,11 +2,12 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import BallsHeader from "../BallsHeader/BallsHeader";
 import BallsHomePage from "../../pages/BallsHomePage/BallsHomePage";
-import MainContainerStyled from "../../styles/shared/MainContainerStyled";
 import BallsLoading from "../BallsLoading/BallsLoading";
 import { useAppSelector } from "../../store/hooks";
 import ToastStyled from "../../styles/shared/ToastStyled";
 import BallsAddPage from "../../pages/BallsAddPage/BallsAddPage";
+import BallDetailPage from "../../pages/BallDetailPage/BallDetailPage";
+import ScrollToTop from "../../utils/ScrollToTopFunction";
 
 const App = (): React.ReactElement => {
   const uiState = useAppSelector((state) => state.uiState);
@@ -16,13 +17,13 @@ const App = (): React.ReactElement => {
       <BallsHeader />
       {uiState.isLoading && <BallsLoading />}
       <ToastStyled icon={false} autoClose={5000} />
-      <MainContainerStyled>
-        <Routes>
-          <Route path="/" element={<Navigate to="/balls" />} />
-          <Route path="/balls" element={<BallsHomePage />} />
-          <Route path="/add" element={<BallsAddPage />} />
-        </Routes>
-      </MainContainerStyled>
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<Navigate to="/balls" />} />
+        <Route path="/balls" element={<BallsHomePage />} />
+        <Route path="/add" element={<BallsAddPage />} />
+        <Route path="/balls/:ballId" element={<BallDetailPage />} />
+      </Routes>
     </>
   );
 };
