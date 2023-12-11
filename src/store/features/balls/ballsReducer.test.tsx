@@ -4,6 +4,7 @@ import {
   addBallActionCreator,
   ballsReducer,
   deleteBallsActionCreator,
+  loadSelectedBallActionCreator,
   loadBallsActionCreator,
   toggleHaveBallsActionCreator,
 } from "./ballsSlice";
@@ -11,17 +12,18 @@ import {
 describe("Given a loadBalls minireducer", () => {
   describe("When it receives a list with 'Harry Potter crew' and 'My neighbor Totoro' balls", () => {
     test("Then it should return a list with 'Harry Potter crew' and 'My neighbor Totoro' balls", () => {
-      const ballsList = ballsMock;
-      const currentBallsState: BallsStateStructure = {
-        balls: [],
+      const mockData = ballsMock;
+      const initialState: BallsStateStructure = {
+        balls: mockData,
+        selectedBall: {} as BallsStructure,
       };
 
       const newBallsState = ballsReducer(
-        currentBallsState,
-        loadBallsActionCreator(ballsList),
+        initialState,
+        loadBallsActionCreator(mockData),
       );
 
-      expect(newBallsState.balls).toStrictEqual(ballsList);
+      expect(newBallsState.balls).toStrictEqual(mockData);
     });
   });
 });
@@ -29,8 +31,10 @@ describe("Given a loadBalls minireducer", () => {
 describe("Given a deleteBalls minireducer", () => {
   describe("When it receives a list of three balls, an existing ball id an the deleteBall method", () => {
     test("Then it should return the list of two balls without the deleted ball 'Harry Potter crew'", () => {
+      const mockData = ballsMock;
       const initialState: BallsStateStructure = {
-        balls: ballsMock,
+        balls: mockData,
+        selectedBall: {} as BallsStructure,
       };
       const expectedDeletedBalls = "Harry Potter crew";
       const expectedBallId = "656241b0c4ddfcae991f0b13";
@@ -52,7 +56,10 @@ describe("Given a addBalls minireducer", () => {
     test("Then it should return the balls full list with 'Never ending story' ball added", () => {
       const mockData = ballsMock;
       const newBallmock = ballAddMock;
-      const initialState: BallsStateStructure = { balls: mockData };
+      const initialState: BallsStateStructure = {
+        balls: mockData,
+        selectedBall: {} as BallsStructure,
+      };
       const newBall: BallsStructure = ballAddMock[3];
 
       const currentBallState = ballsReducer(
@@ -66,10 +73,13 @@ describe("Given a addBalls minireducer", () => {
 });
 
 describe("Given a toggleBalls minireducer", () => {
+  const mockData = ballsMock;
+
   describe("When it receives a 'Harry Potter crew' ball with Have state in true", () => {
     test("Then it should show a 'Harry Potter crew' ball with Have state in false", async () => {
       const initialState: BallsStateStructure = {
-        balls: ballsMock,
+        balls: mockData,
+        selectedBall: {} as BallsStructure,
       };
       const expectedId = "656241b0c4ddfcae991f0b13";
 
@@ -81,6 +91,23 @@ describe("Given a toggleBalls minireducer", () => {
       );
 
       expect(currentBallState.balls[0].isTengui).toBeFalsy();
+    });
+  });
+
+  describe("When it receives a balls list and the actions getBallById", () => {
+    test("Then it should return the 'Harry Potter crew' ball selected", () => {
+      const initialState: BallsStateStructure = {
+        balls: mockData,
+        selectedBall: {} as BallsStructure,
+      };
+      const selectedBall: BallsStructure = mockData[0];
+
+      const currentBallState = ballsReducer(
+        initialState,
+        loadSelectedBallActionCreator(selectedBall),
+      );
+
+      expect(currentBallState.selectedBall).toStrictEqual(selectedBall);
     });
   });
 });
