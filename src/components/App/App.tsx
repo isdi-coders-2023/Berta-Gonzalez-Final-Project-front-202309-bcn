@@ -8,6 +8,7 @@ import ToastStyled from "../../styles/shared/ToastStyled";
 import BallsAddPage from "../../pages/BallsAddPage/BallsAddPage";
 import BallDetailPage from "../../pages/BallDetailPage/BallDetailPage";
 import ScrollToTop from "../../utils/ScrollToTopFunction";
+import ModifyBallPage from "../../pages/ModifyBallPage/ModifyBallPage";
 
 const App = (): React.ReactElement => {
   const uiState = useAppSelector((state) => state.uiState);
@@ -23,6 +24,7 @@ const App = (): React.ReactElement => {
         <Route path="/balls" element={<BallsHomePage />} />
         <Route path="/add" element={<BallsAddPage />} />
         <Route path="/balls/:ballId" element={<BallDetailPage />} />
+        <Route path="/balls/:ballId/modify" element={<ModifyBallPage />} />
       </Routes>
     </>
   );
