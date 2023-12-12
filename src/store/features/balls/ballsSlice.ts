@@ -38,6 +38,15 @@ const ballsSlice = createSlice({
       ...currentState,
       selectedBall: action.payload,
     }),
+    modifyBall: (
+      currentState: BallsStateStructure,
+      action: PayloadAction<BallsStructure>,
+    ): BallsStateStructure => ({
+      ...currentState,
+      balls: currentState.balls.map((ball) =>
+        ball._id !== action.payload._id ? ball : action.payload,
+      ),
+    }),
     toggleHaveBalls: (
       currentState,
       action: PayloadAction<string>,
@@ -56,6 +65,7 @@ export const {
   deleteBalls: deleteBallsActionCreator,
   addBall: addBallActionCreator,
   loadSelectedBall: loadSelectedBallActionCreator,
+  modifyBall: modifyBallActionCreator,
   toggleHaveBalls: toggleHaveBallsActionCreator,
 } = ballsSlice.actions;
 export const ballsReducer = ballsSlice.reducer;
