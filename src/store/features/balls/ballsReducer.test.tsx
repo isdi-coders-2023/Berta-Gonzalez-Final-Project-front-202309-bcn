@@ -1,4 +1,8 @@
-import { ballAddMock, ballsMock } from "../../../mocks/ballsMock";
+import {
+  ballAddMock,
+  ballsMock,
+  ballsModifyMock,
+} from "../../../mocks/ballsMock";
 import { BallsStateStructure, BallsStructure } from "./types";
 import {
   addBallActionCreator,
@@ -7,6 +11,7 @@ import {
   loadSelectedBallActionCreator,
   loadBallsActionCreator,
   toggleHaveBallsActionCreator,
+  modifyBallActionCreator,
 } from "./ballsSlice";
 
 describe("Given a loadBalls minireducer", () => {
@@ -108,6 +113,27 @@ describe("Given a toggleBalls minireducer", () => {
       );
 
       expect(currentBallState.selectedBall).toStrictEqual(selectedBall);
+    });
+  });
+
+  describe("When it receives a balls list, and 'Harry Potter crew' ball and the action modifyBall", () => {
+    test("Then it should return the list of balls with the 'Harry Potter crew' ball modified", () => {
+      const modifiedBall = {
+        ...ballsModifyMock[0],
+        ballName: "Harry Potter crew",
+      };
+
+      const initialState: BallsStateStructure = {
+        balls: ballsModifyMock,
+        selectedBall: {} as BallsStructure,
+      };
+
+      const currentBallState = ballsReducer(
+        initialState,
+        modifyBallActionCreator(modifiedBall),
+      );
+
+      expect(currentBallState.balls).toStrictEqual(ballsModifyMock);
     });
   });
 });
