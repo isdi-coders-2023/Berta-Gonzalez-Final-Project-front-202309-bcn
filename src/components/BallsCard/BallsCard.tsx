@@ -37,17 +37,19 @@ const BallsCard = ({
     }
   };
 
-  const getBallsByIdApi = useCallback(() => {
-    (async () => {
-      const ballById = await loadSelectedBall(_id);
+  const getBallsByIdApi = () => {
+    navigate(`/balls/${_id}`);
+  };
 
-      if (ballById) {
-        dispatch(loadSelectedBallActionCreator(ballById));
+  const modifyBallApi = async (): Promise<void> => {
+    const selectedBall = await loadSelectedBall(_id);
 
-        navigate(`/balls/${_id}`);
-      }
-    })();
-  }, [dispatch, _id, navigate, loadSelectedBall]);
+    if (selectedBall) {
+      dispatch(loadSelectedBallActionCreator(selectedBall));
+    }
+
+    navigate(`/balls/${_id}/modify`);
+  };
 
   const handlerToggleIsTengui = useCallback(async () => {
     await setToggleIsTengui(_id, isTengui);
@@ -99,7 +101,11 @@ const BallsCard = ({
             type="button"
             actionOnClick={getBallsByIdApi}
           />
-          <BallsButton text="Modify" type="button" actionOnClick={undefined} />
+          <BallsButton
+            text="Modify"
+            type="button"
+            actionOnClick={modifyBallApi}
+          />
           <BallsButton
             text="Delete"
             type="button"
