@@ -14,10 +14,11 @@ const BallsNavMenuStyled = styled.nav`
     color: ${({ theme }) => theme.color.darkFontColor};
     display: flex;
     flex-direction: row;
+    padding-right: 21px;
+    gap: 20px;
 
     &__text {
       font-size: 1.688rem;
-      margin-right: 30px;
     }
   }
 
