@@ -1,16 +1,24 @@
 import { http, HttpResponse } from "msw";
-import { ballsMock } from "./ballsMock";
+import {
+  ballsMock,
+  ballsModifyMock,
+  gremlinsMock,
+  harryPotterMock,
+} from "./ballsMock";
 
 const urlApi = import.meta.env.VITE_API_URL;
 
 export const handler = [
   http.get(`${urlApi}/balls`, () => {
-    return HttpResponse.json(ballsMock);
+    return HttpResponse.json({ ball: ballsMock });
   }),
   http.delete(`${urlApi}/balls/:id`, () => HttpResponse.json({})),
   http.patch(`${urlApi}/balls`, () => HttpResponse.json()),
-  http.post(`${urlApi}/balls/add`, () => HttpResponse.json()),
-  http.get(`${urlApi}/balls/:id`, () => HttpResponse.json()),
+  http.post(`${urlApi}/balls/add`, () => HttpResponse.json(gremlinsMock)),
+  http.get(`${urlApi}/balls/:id`, () => HttpResponse.json(harryPotterMock)),
+  http.patch(`${urlApi}/balls/:id`, () =>
+    HttpResponse.json({ ball: ballsModifyMock }),
+  ),
 ];
 
 export const errorHandlers = [
@@ -19,4 +27,5 @@ export const errorHandlers = [
   http.patch(`${urlApi}/balls`, () => HttpResponse.error()),
   http.post(`${urlApi}/balls/add`, () => HttpResponse.error()),
   http.get(`${urlApi}/balls/:id`, () => HttpResponse.error()),
+  http.patch(`${urlApi}/balls/:id`, () => HttpResponse.error()),
 ];

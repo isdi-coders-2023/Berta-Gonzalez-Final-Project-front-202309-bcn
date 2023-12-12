@@ -16,7 +16,7 @@ describe("Given a useBallsApi custom hook", () => {
 
       const currentBalls = await getBallsApi();
 
-      expect(currentBalls).toStrictEqual(expectedBalls);
+      expect(currentBalls).toStrictEqual({ ball: expectedBalls });
     });
   });
 });

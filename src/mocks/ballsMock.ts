@@ -14,6 +14,19 @@ export const harryPotterMock: BallsStructure = {
   isTengui: true,
 };
 
+export const harryPotterModifiedMock: BallsStructure = {
+  _id: "656241b0c4ddfcae991f0b13",
+  ballName: "Harry Potter crew",
+  isAvailable: true,
+  collection: "Harry Potter",
+  shop: "Etsy",
+  yearRelease: 2019,
+  price: 15.99,
+  imageUrl: "https://i.ibb.co/9nQ7X0R/harry-potter.webp",
+  description: "They are made of plush, filled with foam",
+  isTengui: true,
+};
+
 export const totoroMock: BallsStructure = {
   _id: "656241c6c4ddfcae991f4237",
   ballName: "My neighbor Totoro",
@@ -61,6 +74,13 @@ export const ballsMock: BallsStructure[] = [
 
 export const ballAddMock: BallsStructure[] = [
   harryPotterMock,
+  totoroMock,
+  marioMock,
+  gremlinsMock,
+];
+
+export const ballsModifyMock: BallsStructure[] = [
+  harryPotterModifiedMock,
   totoroMock,
   marioMock,
   gremlinsMock,

@@ -12,7 +12,6 @@ import {
 } from "../store/features/ui/uiSlice";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-
 export interface UseBallsApiStructure {
   getBalls: () => Promise<BallsStructure | void>;
   deleteBalls: (id: string) => Promise<Record<string, never> | void>;
@@ -20,9 +19,11 @@ export interface UseBallsApiStructure {
   addBalls: (
     ball: BallWithoutId,
   ) => Promise<{ ball: BallsStructure } | undefined>;
+  modifyBall: (newBall: BallsStructure) => Promise<void>;
   loadSelectedBall: () => Promise<BallsStructure | void>;
 }
 axios.defaults.baseURL = import.meta.env.VITE_API_URL;
+const toastifyPosition = toast.POSITION.TOP_CENTER;
 
 const useBallsApi = () => {
   const dispatch = useAppDispatch();
@@ -46,7 +47,7 @@ const useBallsApi = () => {
       dispatch(hideLoadingActionCreator());
 
       toast.error("Nerdmas Balls could not be loaded", {
-        position: toast.POSITION.TOP_CENTER,
+        position: toastifyPosition,
         className: "toast toast--fail",
       });
     }
@@ -59,7 +60,7 @@ const useBallsApi = () => {
 
         const { data } = await axios.delete(`/balls/${id}`);
         toast.success("Nerdmas Ball deleted successfully", {
-          position: toast.POSITION.TOP_CENTER,
+          position: toastifyPosition,
           className: "toast toast--success",
         });
 
@@ -70,7 +71,7 @@ const useBallsApi = () => {
         dispatch(hideLoadingActionCreator());
 
         toast.error("Nerdmas Ball could not be deleted", {
-          position: toast.POSITION.TOP_CENTER,
+          position: toastifyPosition,
           className: "toast toast--fail",
         });
       }
@@ -89,7 +90,7 @@ const useBallsApi = () => {
           ball: BallsStructure;
         }>("/balls/add", newBall);
         toast.success("Nerdmas Ball added successfully", {
-          position: toast.POSITION.TOP_CENTER,
+          position: toastifyPosition,
           className: "toast toast--success",
         });
 
@@ -101,7 +102,7 @@ const useBallsApi = () => {
         dispatch(hideLoadingActionCreator());
 
         toast.error("Nerdmas Ball could not be added", {
-          position: toast.POSITION.TOP_CENTER,
+          position: toastifyPosition,
           className: "toast toast--fail",
         });
       }
@@ -124,12 +125,46 @@ const useBallsApi = () => {
       } catch (error) {
         dispatch(hideLoadingActionCreator());
         toast.error("Fail to select this Nerdmas Ball info", {
-          position: toast.POSITION.TOP_CENTER,
+          position: toastifyPosition,
           className: "toast toast--fail",
         });
       }
     },
     [dispatch],
+  );
+
+  const modifyBall = useCallback(
+    async (ballId: string, modifiedBall: BallWithoutId) => {
+      try {
+        dispatch(showLoadingActionCreator());
+
+        const {
+          data: { ball },
+        } = await axios.patch<{ ball: BallsStructure }>(
+          `/balls/${ballId}`,
+          modifiedBall,
+        );
+
+        dispatch(hideLoadingActionCreator());
+
+        toast.success("Nerdmas Ball modified successfully", {
+          position: toastifyPosition,
+          className: "toast toast--success",
+        });
+
+        navigate("/balls");
+
+        return ball;
+      } catch {
+        dispatch(hideLoadingActionCreator());
+
+        toast.success("Nerdmas Ball could not be modified", {
+          position: toastifyPosition,
+          className: "toast toast--fail",
+        });
+      }
+    },
+    [dispatch, navigate],
   );
 
   const setToggleIsTengui = useCallback(
@@ -141,13 +176,13 @@ const useBallsApi = () => {
         });
 
         toast.success("Nerdmas Ball change successfully", {
-          position: toast.POSITION.TOP_CENTER,
+          position: toastifyPosition,
           className: "toast toast--success",
         });
       } catch {
         dispatch(hideLoadingActionCreator());
         toast.error("Nerdmas Ball could not be changed", {
-          position: toast.POSITION.TOP_CENTER,
+          position: toastifyPosition,
           className: "toast toast--fail",
         });
       }
@@ -160,6 +195,7 @@ const useBallsApi = () => {
     deleteBalls,
     setToggleIsTengui,
     addBalls,
+    modifyBall,
     loadSelectedBall,
   };
 };

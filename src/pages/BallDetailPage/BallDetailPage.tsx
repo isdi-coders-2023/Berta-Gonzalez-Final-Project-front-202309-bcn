@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import {
   deleteBallsActionCreator,
@@ -10,7 +10,6 @@ import BallsButton from "../../components/BallsButton/BallsButton";
 import { useNavigate, useParams } from "react-router-dom";
 import BallDetailPageStyled from "./BallDetailPageStyled";
 import MainContainerStyled from "../../styles/shared/MainContainerStyled";
-import { BallsStructure } from "../../store/features/balls/types";
 
 const BallDetailPage = (): React.ReactElement => {
   const dispatch = useAppDispatch();
@@ -19,17 +18,16 @@ const BallDetailPage = (): React.ReactElement => {
     useBallsApi();
   const ball = useAppSelector((state) => state.ballsState.selectedBall);
   const navigate = useNavigate();
-  const [isTengui, setIsTengui] = useState<boolean>(false);
 
   useEffect(() => {
     (async () => {
-      if (ballId) {
-        const selectedBall = await loadSelectedBall(ballId);
-        dispatch(loadSelectedBallActionCreator(selectedBall as BallsStructure));
-        setIsTengui(ball.isTengui);
+      const selectedBall = await loadSelectedBall(ballId!);
+
+      if (selectedBall) {
+        dispatch(loadSelectedBallActionCreator(selectedBall));
       }
     })();
-  }, [dispatch, ballId, loadSelectedBall, ball.isTengui]);
+  }, [dispatch, ballId, loadSelectedBall]);
 
   const deleteBallsApi = async (): Promise<void> => {
     await deleteBalls(ballId!);
@@ -50,8 +48,7 @@ const BallDetailPage = (): React.ReactElement => {
     dispatch(
       loadSelectedBallActionCreator({ ...ball, isTengui: !ball.isTengui }),
     );
-    setIsTengui(!isTengui);
-  }, [setToggleIsTengui, ball, dispatch, isTengui]);
+  }, [setToggleIsTengui, ball, dispatch]);
 
   return (
     <BallDetailPageStyled className="detail">
@@ -75,7 +72,7 @@ const BallDetailPage = (): React.ReactElement => {
                   title="it's have or not checkbox"
                   type="checkbox"
                   id="checkbox"
-                  checked={isTengui}
+                  checked={!ball.isTengui ? false : ball.isTengui}
                   onChange={handlerToggleIsTengui}
                 />
               </label>
@@ -110,7 +107,7 @@ const BallDetailPage = (): React.ReactElement => {
         </MainContainerStyled>
       </div>
       <div className="button-container">
-        <BallsButton text="Modify" type="button" actionOnClick={undefined} />
+        <BallsButton text="Modify" type="button" />
         <BallsButton
           text="Delete"
           type="button"

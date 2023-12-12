@@ -1,4 +1,4 @@
-import { renderHook, screen } from "@testing-library/react";
+import { fireEvent, renderHook, screen } from "@testing-library/react";
 import {
   customRender,
   customRenderWithoutRouter,
@@ -57,6 +57,30 @@ describe("Given an App component", () => {
       const failFeedback = await screen.findByText(errorMessage);
 
       expect(failFeedback).toBeInTheDocument();
+    });
+  });
+
+  describe("When it is rendered on the modifyBallPage and the user changes 'Harry Potter crew' ball and clicks on the button to modify", () => {
+    test("Then it should modify the 'Harry Potter crew' ball and go to homepage", async () => {
+      const buttonText = "Modify";
+      const homePageHeading = "Modify the ball";
+
+      customRenderWithoutRouter(
+        <MemoryRouter
+          initialEntries={["/balls/656241b0c4ddfcae991f0b13/modify"]}
+        >
+          <App />
+        </MemoryRouter>,
+      );
+
+      const button = screen.getByRole("button", { name: buttonText });
+      await fireEvent.submit(button);
+
+      const title = await screen.getByRole("heading", {
+        name: homePageHeading,
+      });
+
+      expect(title).toBeInTheDocument();
     });
   });
 });
