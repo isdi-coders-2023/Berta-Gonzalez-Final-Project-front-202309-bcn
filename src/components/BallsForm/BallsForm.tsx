@@ -9,9 +9,15 @@ import MainContainerStyled from "../../styles/shared/MainContainerStyled";
 
 interface BallsFormProps {
   submitAction: (newBall: BallsStructure) => void;
+  selectedBall?: BallsStructure;
+  text: string;
 }
 
-const BallsForm = ({ submitAction }: BallsFormProps): React.ReactElement => {
+const BallsForm = ({
+  submitAction,
+  selectedBall,
+  text,
+}: BallsFormProps): React.ReactElement => {
   const emptyBall: BallWithoutId = {
     ballName: "",
     isAvailable: false,
@@ -24,7 +30,9 @@ const BallsForm = ({ submitAction }: BallsFormProps): React.ReactElement => {
     isTengui: false,
   };
 
-  const [newBall, setNewBall] = useState<BallWithoutId>(emptyBall);
+  const initialState = selectedBall ?? emptyBall;
+
+  const [newBall, setNewBall] = useState<BallWithoutId>(initialState);
 
   const onChangeData = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -64,6 +72,7 @@ const BallsForm = ({ submitAction }: BallsFormProps): React.ReactElement => {
           type="text"
           id="ballName"
           onChange={onChangeData}
+          defaultValue={newBall.ballName}
           required
         />
         <label htmlFor="isAvailable" className="form__label">
@@ -73,10 +82,18 @@ const BallsForm = ({ submitAction }: BallsFormProps): React.ReactElement => {
           <option value="options" className="form__input">
             Select
           </option>
-          <option value="yes" className="form__input">
+          <option
+            selected={newBall.isAvailable}
+            value="yes"
+            className="form__input"
+          >
             Yes
           </option>
-          <option value="no" className="form__input">
+          <option
+            selected={newBall.isAvailable}
+            value="no"
+            className="form__input"
+          >
             No
           </option>
         </select>
@@ -88,6 +105,7 @@ const BallsForm = ({ submitAction }: BallsFormProps): React.ReactElement => {
           type="text"
           id="collection"
           onChange={onChangeData}
+          defaultValue={newBall.collection}
           required
         />
         <label htmlFor="shop" className="form__label">
@@ -98,6 +116,7 @@ const BallsForm = ({ submitAction }: BallsFormProps): React.ReactElement => {
           type="text"
           id="shop"
           onChange={onChangeData}
+          defaultValue={newBall.shop}
           required
         />
         <label htmlFor="yearRelease" className="form__label">
@@ -111,6 +130,7 @@ const BallsForm = ({ submitAction }: BallsFormProps): React.ReactElement => {
           min={1900}
           max={2023}
           onChange={onChangeData}
+          defaultValue={newBall.yearRelease}
           required
         />
         <label htmlFor="price" className="form__label">
@@ -123,6 +143,7 @@ const BallsForm = ({ submitAction }: BallsFormProps): React.ReactElement => {
           step={0.01}
           min={0}
           onChange={onChangeData}
+          defaultValue={newBall.price}
           required
         />
         <label htmlFor="imageUrl" className="form__label">
@@ -133,6 +154,7 @@ const BallsForm = ({ submitAction }: BallsFormProps): React.ReactElement => {
           type="url"
           id="imageUrl"
           onChange={onChangeData}
+          defaultValue={newBall.imageUrl}
           required
         />
         <label htmlFor="description" className="form__label">
@@ -142,6 +164,7 @@ const BallsForm = ({ submitAction }: BallsFormProps): React.ReactElement => {
           className="form__input form__input--textarea"
           id="description"
           onChange={onChangeData}
+          defaultValue={newBall.description}
           required
         />
         <div className="form__label form__label--checkbox">
@@ -152,16 +175,12 @@ const BallsForm = ({ submitAction }: BallsFormProps): React.ReactElement => {
             className="form__checkbox form__label--check"
             type="checkbox"
             id="isTengui"
+            checked={newBall.isTengui}
             onChange={onChangeData}
           />
         </div>
         <div className="form__button">
-          <BallsButton
-            text="Create"
-            type="submit"
-            className="form__button--box"
-            actionOnClick={undefined}
-          />
+          <BallsButton text={text} type="submit" actionOnClick={undefined} />
         </div>
       </BallsFormStyled>
     </MainContainerStyled>
