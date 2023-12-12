@@ -8,7 +8,7 @@ const BallsAddPage = (): React.ReactElement => {
   return (
     <BallsAddPageStyled>
       <h1 className="addpage-text">Add a new Nerdmas Ball</h1>
-      <BallsForm submitAction={addBalls} />
+      <BallsForm submitAction={addBalls} text="Create" />
     </BallsAddPageStyled>
   );
 };
