@@ -21,7 +21,7 @@ const GlobalStyle = createGlobalStyle`
   ul,
   li {
     list-style: none;
-    margin-top: 0;
+    margin: 0;
     padding: 0;
   }
 
