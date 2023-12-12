@@ -83,4 +83,20 @@ describe("Given an App component", () => {
       expect(title).toBeInTheDocument();
     });
   });
+
+  describe("When it receives an unknown path /baljshd and it renders the Not Found Page", () => {
+    test("Then it should show 'Dinochristmas page not found'", () => {
+      const expectedAltText = "christmas dinosaur page not found";
+      const path = "/baljshd";
+
+      customRenderWithoutRouter(
+        <MemoryRouter initialEntries={[path]}>
+          <App />
+        </MemoryRouter>,
+      );
+      const notFoundImage = screen.getByAltText(expectedAltText);
+
+      expect(notFoundImage).toBeInTheDocument();
+    });
+  });
 });

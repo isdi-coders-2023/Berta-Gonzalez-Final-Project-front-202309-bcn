@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import {
   BallWithoutId,
   BallsStructure,
@@ -23,7 +23,7 @@ const BallsForm = ({
     isAvailable: false,
     collection: "",
     shop: "",
-    yearRelease: 0,
+    yearRelease: 1900,
     price: 0,
     imageUrl: "",
     description: "",
@@ -34,17 +34,22 @@ const BallsForm = ({
 
   const [newBall, setNewBall] = useState<BallWithoutId>(initialState);
 
-  const onChangeData = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    setNewBall({
-      ...newBall,
-      [event.target.id]:
-        event.target.type !== "checkbox"
-          ? (event.target as HTMLInputElement).value
-          : (event.target as HTMLInputElement).checked,
-    });
-  };
+  const onChangeData = useCallback(
+    (
+      event: React.ChangeEvent<
+        HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+      >,
+    ) => {
+      setNewBall(() => ({
+        ...newBall,
+        [event.target.id]:
+          event.target.type !== "checkbox"
+            ? (event.target as HTMLInputElement).value
+            : (event.target as HTMLInputElement).checked,
+      }));
+    },
+    [newBall],
+  );
 
   useEffect(() => {
     const newBallValues = Object.values(newBall);
@@ -144,7 +149,6 @@ const BallsForm = ({
           min={0}
           onChange={onChangeData}
           defaultValue={newBall.price}
-          required
         />
         <label htmlFor="imageUrl" className="form__label">
           Image URL

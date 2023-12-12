@@ -9,6 +9,7 @@ import BallsAddPage from "../../pages/BallsAddPage/BallsAddPage";
 import BallDetailPage from "../../pages/BallDetailPage/BallDetailPage";
 import ScrollToTop from "../../utils/ScrollToTopFunction";
 import ModifyBallPage from "../../pages/ModifyBallPage/ModifyBallPage";
+import BallNotFoundPage from "../../pages/BallNotFoundPage/BallNotFoundPage";
 
 const App = (): React.ReactElement => {
   const uiState = useAppSelector((state) => state.uiState);
@@ -17,6 +18,7 @@ const App = (): React.ReactElement => {
     <>
       <BallsHeader />
       {uiState.isLoading && <BallsLoading />}
+
       <ToastStyled icon={false} autoClose={5000} />
       <ScrollToTop />
       <Routes>
@@ -25,6 +27,7 @@ const App = (): React.ReactElement => {
         <Route path="/add" element={<BallsAddPage />} />
         <Route path="/balls/:ballId" element={<BallDetailPage />} />
         <Route path="/balls/:ballId/modify" element={<ModifyBallPage />} />
+        <Route path="*" element={<BallNotFoundPage />} />
       </Routes>
     </>
   );
