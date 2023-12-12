@@ -14,7 +14,9 @@ describe("Given a BallsForm component", () => {
     test("Then it should show a form with a 'Ball Name' label text", () => {
       const expectedLabelText = "Ball Name";
 
-      customRenderWithoutRouter(<BallsForm submitAction={actionOnClick} />);
+      customRenderWithoutRouter(
+        <BallsForm submitAction={actionOnClick} text="text" />,
+      );
 
       const labelText = screen.getByLabelText(expectedLabelText);
 
@@ -22,7 +24,9 @@ describe("Given a BallsForm component", () => {
     });
 
     test("Then it should show a button with the text 'Create'", () => {
-      customRenderWithoutRouter(<BallsForm submitAction={actionOnClick} />);
+      customRenderWithoutRouter(
+        <BallsForm submitAction={actionOnClick} text="Create" />,
+      );
 
       const button = screen.getByRole("button", { name: expectedButtonText });
 
@@ -34,7 +38,9 @@ describe("Given a BallsForm component", () => {
     test("Then it should show the checkbox as checked", async () => {
       const haveInputText = "Have";
 
-      customRenderWithoutRouter(<BallsForm submitAction={actionOnClick} />);
+      customRenderWithoutRouter(
+        <BallsForm submitAction={actionOnClick} text="text" />,
+      );
 
       const checkboxInput = screen.getByRole("checkbox", {
         name: haveInputText,
@@ -50,7 +56,9 @@ describe("Given a BallsForm component", () => {
     test("Then int should show the writen text in the fields", async () => {
       const expectInputText = "Gremlins";
 
-      customRenderWithoutRouter(<BallsForm submitAction={actionOnClick} />);
+      customRenderWithoutRouter(
+        <BallsForm submitAction={actionOnClick} text="text" />,
+      );
 
       const labelText = screen.getByLabelText("Ball Name");
 
@@ -65,7 +73,7 @@ describe("Given a BallsForm component", () => {
   describe("When user clicks on create new ball button", () => {
     test("Then it should call it onSubmit action", () => {
       const labelText = "Ball Name";
-      customRender(<BallsForm submitAction={actionOnClick} />);
+      customRender(<BallsForm submitAction={actionOnClick} text="text" />);
 
       const ballForm = screen.getByLabelText(labelText);
       fireEvent.submit(ballForm);
@@ -90,7 +98,7 @@ describe("Given a BallsForm component", () => {
       const imageUrlLabelText = "Image URL";
       const descriptionLabelText = "Description";
 
-      customRender(<BallsForm submitAction={actionOnClick} />);
+      customRender(<BallsForm submitAction={actionOnClick} text="Create" />);
 
       const inputBallNameElement = screen.getByLabelText(ballNameLabelText);
       await userEvent.type(inputBallNameElement, expectedInputText);
