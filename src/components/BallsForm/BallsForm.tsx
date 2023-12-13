@@ -84,7 +84,7 @@ const BallsForm = ({
           Is Available
         </label>
         <select className="form__input" id="isAvailable" required>
-          <option value="options" className="form__input">
+          <option value="" className="form__input">
             Select
           </option>
           <option
