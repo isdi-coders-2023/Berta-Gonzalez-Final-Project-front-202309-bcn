@@ -1,6 +1,5 @@
 import {
   deleteBallsActionCreator,
-  loadSelectedBallActionCreator,
   loadBallsActionCreator,
   toggleHaveBallsActionCreator,
 } from "../../store/features/balls/ballsSlice";
@@ -21,8 +20,7 @@ const BallsCard = ({
   ball: { ballName, _id, isTengui, imageUrl, isAvailable, collection, shop },
 }: BallsProps): React.ReactElement => {
   const dispatch = useAppDispatch();
-  const { loadSelectedBall, deleteBalls, getBallsApi, setToggleIsTengui } =
-    useBallsApi();
+  const { deleteBalls, getBallsApi, setToggleIsTengui } = useBallsApi();
 
   const navigate = useNavigate();
 
@@ -42,12 +40,6 @@ const BallsCard = ({
   };
 
   const modifyBallApi = async (): Promise<void> => {
-    const selectedBall = await loadSelectedBall(_id);
-
-    if (selectedBall) {
-      dispatch(loadSelectedBallActionCreator(selectedBall));
-    }
-
     navigate(`/balls/${_id}/modify`);
   };
 
