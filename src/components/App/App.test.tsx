@@ -8,6 +8,7 @@ import { MemoryRouter } from "react-router-dom";
 import useBallsApi from "../../hooks/useBallsApi";
 import { gremlinsMock } from "../../mocks/ballsMock";
 import { providerWrapper } from "../../testUtils/customWrapper";
+import userEvent from "@testing-library/user-event";
 
 describe("Given an App component", () => {
   describe("When it's rendered", () => {
@@ -60,10 +61,28 @@ describe("Given an App component", () => {
     });
   });
 
+  describe("When it is rendered on BallById detail page", () => {
+    test("Then it should shou 'See all the details' inside a heading", async () => {
+      const buttonText = "Info";
+      const detailPageText = "See all the details";
+
+      customRender(<App />);
+
+      const button = screen.getAllByRole("button", { name: buttonText });
+      await userEvent.click(button[0]);
+
+      const title = await screen.getByRole("heading", {
+        name: detailPageText,
+      });
+
+      expect(title).toBeInTheDocument();
+    });
+  });
+
   describe("When it is rendered on the modifyBallPage and the user changes 'Harry Potter crew' ball and clicks on the button to modify", () => {
     test("Then it should modify the 'Harry Potter crew' ball and go to homepage", async () => {
       const buttonText = "Modify";
-      const homePageHeading = "Modify the ball";
+      const modifyPageHeading = "Modify the ball";
 
       customRenderWithoutRouter(
         <MemoryRouter
@@ -77,7 +96,48 @@ describe("Given an App component", () => {
       await fireEvent.submit(button);
 
       const title = await screen.getByRole("heading", {
-        name: homePageHeading,
+        name: modifyPageHeading,
+      });
+
+      expect(title).toBeInTheDocument();
+    });
+  });
+
+  describe("When it is rendered on the detail page and the user clicks the 'Modify' button", () => {
+    test("Then it should navigate to the modify page", async () => {
+      const buttonText = "Modify";
+      const nameField = "Ball Name";
+
+      customRenderWithoutRouter(
+        <MemoryRouter initialEntries={["/balls/:ballId"]}>
+          <App />,
+        </MemoryRouter>,
+      );
+
+      const modifyButton = screen.getByRole("button", { name: buttonText });
+
+      await userEvent.click(modifyButton);
+
+      const nameFieldInput = await screen.findByRole("textbox", {
+        name: nameField,
+      });
+
+      expect(nameFieldInput).toBeInTheDocument();
+    });
+  });
+
+  describe("When it is rendered on the modifyBallPage and the user changes 'Harry Potter crew' ball and clicks on the button to modify", () => {
+    test("Then it should modify the 'Harry Potter crew' ball and go to homepage", async () => {
+      const buttonText = "Modify";
+      const modifyPageHeading = "Modify the ball";
+
+      customRender(<App />);
+
+      const button = screen.getAllByRole("button", { name: buttonText });
+      await userEvent.click(button[0]);
+
+      const title = await screen.findByRole("heading", {
+        name: modifyPageHeading,
       });
 
       expect(title).toBeInTheDocument();

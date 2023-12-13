@@ -36,10 +36,20 @@ const BallDetailPage = (): React.ReactElement => {
     const balls = await getBallsApi();
 
     if (balls) {
-      dispatch(loadBallsActionCreator(balls.balls));
+      dispatch(loadBallsActionCreator(balls));
 
       navigate(`/balls`);
     }
+  };
+
+  const modifyBallApi = async (): Promise<void> => {
+    const selectedBall = await loadSelectedBall(ball._id);
+
+    if (selectedBall) {
+      dispatch(loadSelectedBallActionCreator(selectedBall));
+    }
+
+    navigate(`/balls/${ball._id}/modify`);
   };
 
   const handlerToggleIsTengui = useCallback(async () => {
@@ -107,7 +117,11 @@ const BallDetailPage = (): React.ReactElement => {
         </MainContainerStyled>
       </div>
       <div className="button-container">
-        <BallsButton text="Modify" type="button" />
+        <BallsButton
+          text="Modify"
+          type="button"
+          actionOnClick={modifyBallApi}
+        />
         <BallsButton
           text="Delete"
           type="button"

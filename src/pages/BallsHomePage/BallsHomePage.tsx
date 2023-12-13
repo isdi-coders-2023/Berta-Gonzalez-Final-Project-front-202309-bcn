@@ -14,7 +14,7 @@ const BallsHomePage = (): React.ReactElement => {
       const balls = await getBallsApi();
 
       if (balls) {
-        dispatch(loadBallsActionCreator(balls.balls));
+        dispatch(loadBallsActionCreator(balls));
       }
     })();
   }, [dispatch, getBallsApi]);

@@ -12,8 +12,8 @@ describe("Given a useBallsApi custom hook", () => {
 
   describe("When it calls its getBallById method with the 'Harry Potter crew' ball id", () => {
     test("Then it should return 'Harry Potter crew' ball", async () => {
-      const mockData = ballAddMock[4];
-      const expectedByllId = "65624190453433ror943";
+      const mockData = ballAddMock[0];
+      const expectedByllId = "656241b0c4ddfcae991f0b13";
 
       const ball = await loadSelectedBall(expectedByllId);
 

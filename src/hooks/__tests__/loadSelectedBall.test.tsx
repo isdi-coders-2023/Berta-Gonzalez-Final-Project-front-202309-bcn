@@ -1,5 +1,5 @@
 import { renderHook, screen } from "@testing-library/react";
-import { ballAddMock, ballsMock, gremlinsMock } from "../../mocks/ballsMock";
+import { ballAddMock, gremlinsMock } from "../../mocks/ballsMock";
 import useBallsApi from "../useBallsApi";
 import { providerWrapper } from "../../testUtils/customWrapper";
 import server from "../../mocks/node";
@@ -17,7 +17,7 @@ import {
 } from "../../store/features/balls/ballsSlice";
 
 describe("Given a useBallsApi custom hook", () => {
-  const expectedBall = ballsMock[3];
+  const expectedBall = ballAddMock[0];
 
   const {
     result: {
@@ -25,9 +25,9 @@ describe("Given a useBallsApi custom hook", () => {
     },
   } = renderHook(() => useBallsApi(), { wrapper: providerWrapper });
 
-  describe("When it calls its loadSelectedBall method with 'Gremlins'", () => {
-    test("Then it should return 'Gremlins' from the API", async () => {
-      const ballId = "65624190453433ror943";
+  describe("When it calls its loadSelectedBall method with 'Harry Potter crew'", () => {
+    test("Then it should return 'Harry Potter crew' from the API", async () => {
+      const ballId = "656241b0c4ddfcae991f0b13";
 
       const response = await loadSelectedBall(ballId);
 

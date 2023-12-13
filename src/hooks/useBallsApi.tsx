@@ -1,10 +1,6 @@
 import axios from "axios";
 import { useCallback } from "react";
-import {
-  BallWithoutId,
-  BallsStateStructure,
-  BallsStructure,
-} from "../store/features/balls/types";
+import { BallWithoutId, BallsStructure } from "../store/features/balls/types";
 import { useAppDispatch } from "../store/hooks";
 import {
   hideLoadingActionCreator,
@@ -30,19 +26,18 @@ const useBallsApi = () => {
   const navigate = useNavigate();
 
   const getBallsApi = useCallback(async (): Promise<
-    BallsStateStructure | undefined
+    BallsStructure[] | undefined
   > => {
     dispatch(showLoadingActionCreator());
 
     try {
       const { data: balls } = await axios.get<{
         balls: BallsStructure[];
-        selectedBall: BallsStructure;
       }>("/balls");
 
       dispatch(hideLoadingActionCreator());
 
-      return balls;
+      return balls.balls;
     } catch {
       dispatch(hideLoadingActionCreator());
 

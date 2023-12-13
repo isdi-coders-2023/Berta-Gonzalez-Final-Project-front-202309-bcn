@@ -33,7 +33,7 @@ const BallsCard = ({
     const balls = await getBallsApi();
 
     if (balls) {
-      dispatch(loadBallsActionCreator(balls.balls));
+      dispatch(loadBallsActionCreator(balls));
     }
   };
 
