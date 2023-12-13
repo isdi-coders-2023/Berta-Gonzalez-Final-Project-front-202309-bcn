@@ -52,10 +52,10 @@ const BallsForm = ({
   );
 
   useEffect(() => {
-    const newBallValues = Object.values(newBall);
-
-    newBallValues.every((value) => value !== "");
-  });
+    if (selectedBall) {
+      setNewBall({ ...selectedBall });
+    }
+  }, [selectedBall]);
 
   const onFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -176,7 +176,7 @@ const BallsForm = ({
             <span>Have</span>
           </label>
           <input
-            className="form__checkbox form__label--check"
+            className="form__label__check"
             type="checkbox"
             id="isTengui"
             checked={newBall.isTengui}

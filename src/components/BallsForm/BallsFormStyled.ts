@@ -19,7 +19,7 @@ const BallsFormStyled = styled.form`
         gap: 15px;
       }
 
-      &--check {
+      &__check {
         margin-top: 7px;
         width: 20px;
         height: 20px;
