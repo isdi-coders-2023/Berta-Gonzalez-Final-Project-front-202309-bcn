@@ -78,28 +78,11 @@ describe("Given a BallsCard component", () => {
 
       expect(errorText).toBeInTheDocument();
     });
+  });
 
-    describe("When it rendered 'Harry Potter crew' and its have checkbox is clicked", () => {
-      test("Then it should show a feedback message with 'Nerdmas Ball change successfully'", async () => {
-        const feedbackSuccess = "Nerdmas Ball change successfully";
-
-        customRender(<BallsCard ball={mockData[0]} />);
-
-        const checkboxText = screen.getByRole("checkbox", {
-          name: haveText,
-        });
-
-        await userEvent.click(checkboxText);
-
-        const feedbackMessage = screen.getByText(feedbackSuccess);
-
-        expect(feedbackMessage).toBeInTheDocument();
-      });
-    });
-
-    test("Then it should show a feedback message with 'Nerdmas Ball could not be changed'", async () => {
-      const feedbackSuccess = "Nerdmas Ball could not be changed";
-      server.use(...errorHandlers);
+  describe("When it rendered 'Harry Potter crew' and its have checkbox is clicked", () => {
+    test("Then it should show a feedback message with 'Nerdmas Ball change successfully'", async () => {
+      const feedbackSuccess = "Nerdmas Ball change successfully";
 
       customRender(<BallsCard ball={mockData[0]} />);
 
@@ -115,34 +98,51 @@ describe("Given a BallsCard component", () => {
     });
   });
 
-  describe("When the user clicks in 'Info' button", () => {
-    test("Then it should be a link", () => {
-      const textButton = "Info";
-      customRenderWithoutRouter(
-        <MemoryRouter initialEntries={["/balls/656241b0c4ddfcae991f0b13"]}>
-          <BallsCard ball={harryPotterMock} />
-        </MemoryRouter>,
-      );
+  test("Then it should show a feedback message with 'Nerdmas Ball could not be changed'", async () => {
+    const feedbackSuccess = "Nerdmas Ball could not be changed";
+    server.use(...errorHandlers);
 
-      const link = screen.getByRole("button", { name: textButton });
+    customRender(<BallsCard ball={mockData[0]} />);
 
-      expect(link).toBeInTheDocument();
+    const checkboxText = screen.getByRole("checkbox", {
+      name: haveText,
     });
+
+    await userEvent.click(checkboxText);
+
+    const feedbackMessage = screen.getByText(feedbackSuccess);
+
+    expect(feedbackMessage).toBeInTheDocument();
   });
+});
 
-  describe("When the user clicks on the 'Info' button", () => {
-    test("Then it should be redirected to 'Harry Potter crew' detail page", () => {
-      const expectedTitle = "Harry Potter crew";
+describe("When the user clicks in 'Info' button", () => {
+  test("Then it should be a link", () => {
+    const textButton = "Info";
+    customRenderWithoutRouter(
+      <MemoryRouter initialEntries={["/balls/656241b0c4ddfcae991f0b13"]}>
+        <BallsCard ball={harryPotterMock} />
+      </MemoryRouter>,
+    );
 
-      customRenderWithoutRouter(
-        <MemoryRouter initialEntries={["/balls/656241b0c4ddfcae991f0b13"]}>
-          <BallsCard ball={harryPotterMock} />
-        </MemoryRouter>,
-      );
+    const link = screen.getByRole("button", { name: textButton });
 
-      const title = screen.getByRole("heading", { name: expectedTitle });
+    expect(link).toBeInTheDocument();
+  });
+});
 
-      expect(title).toBeInTheDocument();
-    });
+describe("When the user clicks on the 'Info' button", () => {
+  test("Then it should be redirected to 'Harry Potter crew' detail page", () => {
+    const expectedTitle = "Harry Potter crew";
+
+    customRenderWithoutRouter(
+      <MemoryRouter initialEntries={["/balls/656241b0c4ddfcae991f0b13"]}>
+        <BallsCard ball={harryPotterMock} />
+      </MemoryRouter>,
+    );
+
+    const title = screen.getByRole("heading", { name: expectedTitle });
+
+    expect(title).toBeInTheDocument();
   });
 });
